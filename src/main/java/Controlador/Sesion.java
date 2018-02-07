@@ -11,7 +11,9 @@ import javax.faces.view.facelets.FaceletContext;
 import javax.inject.Inject;
 
 import Modelo.Administrador;
+import Modelo.Terapista;
 import Negocio.AdministradorDAO;
+import Negocio.TerapistaDAO;
 
 
 
@@ -24,9 +26,14 @@ public class Sesion implements Serializable{
 	private String password;
 	
 
+	@Inject
+	private SesionDeLogueo ses;
 	
 	@Inject
 	private AdministradorDAO adminDao;
+	
+	@Inject
+	private TerapistaDAO terDao;
 	
 	//Lista de usuarios administradores
 	private List<Administrador> listAdmin;
@@ -47,6 +54,23 @@ public class Sesion implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	
+	/**
+	 * Metodo de logeo del usuario administrador
+	 * @return si se cumple la condicion returna pagina del administrados caso contrario retorna usuario o contraseña incorrecto
+	 */
+	public String loginTerapista(){
+		System.out.println("login....... Terapista");
+		Terapista t=new Terapista();
+		 t= terDao.buscarTerapista(user, password);
+		if(t!=null){	
+			ses.setUser(t);
+			return "Administrador";
+		}else{
+			return null;
+		}
 	}
 	
 	/**
@@ -72,6 +96,14 @@ public class Sesion implements Serializable{
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso:", "Sesión finalizada satisfactoriamente!!"));
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		return "login.jsf?faces-redirect=true";
+	}
+
+	public SesionDeLogueo getSes() {
+		return ses;
+	}
+
+	public void setSes(SesionDeLogueo ses) {
+		this.ses = ses;
 	}
 
 }

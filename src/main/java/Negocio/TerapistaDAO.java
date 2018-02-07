@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import Modelo.Administrador;
 import Modelo.Terapista;
 
 
@@ -83,6 +84,26 @@ public class TerapistaDAO {
 				System.out.println(listado.size());
 				return listado;
 		
+	}
+	
+	public Terapista buscarTerapista(String user,String password){
+		try {
+			Query q = em.createQuery("SELECT a FROM Terapista a WHERE username = :user AND password = :password",Terapista.class);
+			q.setParameter("user", user);
+			q.setParameter("password", password);
+			Terapista admin = (Terapista) q.getSingleResult();
+			
+			
+			if(admin!=null)
+				return admin;
+			
+			return null;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}	
+		
+		return null;
+	
 	}
 	
 }

@@ -199,10 +199,11 @@
 															    </f:facet>
 																
 																<f:facet name="footer">
-														             <p:commandButton action="#{niñoCotroller.MostrarTerapistasSeleccionadas()}"  value="View"/>
-														            
+														             
 														        </f:facet>
 															</p:dataTable>
+															<h:commandButton action="#{niñoCotroller.MostrarTerapistasSeleccionadas()}"  value="DONE"
+														            onclick="javascript:quitarDivcategorias()"></h:commandButton>
 						          </h:form>	
 						<h1 align="center"><a onclick="javascript:quitarTerapistas()">Cancel</a></h1>
 					</div>

@@ -113,7 +113,6 @@ public class NiñoCotroller {
 	public String validarDatosRegistro(){
 		errUsuario = "";
 		
-		
 		// Validamos el username
 		String idUsuario = nino.getUsuario();
 		Niño comprobar = ninoDao.verificarUsuarioNiño(idUsuario);
