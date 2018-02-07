@@ -78,8 +78,8 @@ public class TerapistaDAO {
 				" and apellido like :ap ";
 				Query q = em.createQuery(jpql,Terapista.class);
 				q.setParameter("ced", ced+"%");
-				q.setParameter("nom", nom+"%");
-				q.setParameter("ap", ape+"%");
+				q.setParameter("nom", "%"+nom+"%");
+				q.setParameter("ap", "%"+ape+"%");
 				List<Terapista> listado = q.getResultList();
 				System.out.println(listado.size());
 				return listado;
@@ -92,7 +92,6 @@ public class TerapistaDAO {
 			q.setParameter("user", user);
 			q.setParameter("password", password);
 			Terapista admin = (Terapista) q.getSingleResult();
-			
 			
 			if(admin!=null)
 				return admin;

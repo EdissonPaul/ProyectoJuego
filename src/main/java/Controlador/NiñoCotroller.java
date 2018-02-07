@@ -30,13 +30,16 @@ public class NiñoCotroller {
 	private String campoApellido="";
 	private String campoCedula="";
 	
+	private String nombreNino="";
+	private String apeNino="";
+	
 	
 	private List<Terapista> listaTerapistas;
 	private List<Terapista> selectedTerapistas;
 	
 	
 	//Lista de ninos
-	private List<Niño> listNino;
+	private List<TerapistaNiño> listNino;
 	
 	@Inject
 	private NiñoDAO ninoDao;
@@ -47,14 +50,24 @@ public class NiñoCotroller {
 	@Inject
 	private TerapistaDAO terDao;
 	
+	@Inject
+	private SesionDeLogueo ses;
+	
 	@PostConstruct
 	public void init(){
 		nino = new Niño();
-		listNino = ninoDao.getNinos();
+		loadNinños();
 	}
 	
 	public void loadTerapistas() {
-		listaTerapistas=terDao.getTerapistas(campoCedula,campoNombre,campoApellido);
+		listaTerapistas=terDao.getTerapistas(campoNombre,campoApellido,campoCedula);
+	}
+	
+	public void loadNinños() {
+		if(ses.getUser()!=null) {
+			listNino=ninoDao.getniñoss(ses.getUser().getId(),nombreNino,apeNino);
+			System.out.println("tamaño de lista niños" +listNino.size());
+		}
 	}
 
 	public Niño getNino() {
@@ -65,11 +78,11 @@ public class NiñoCotroller {
 		this.nino = nino;
 	}
 
-	public List<Niño> getListNino() {
+	public List<TerapistaNiño> getListNino() {
 		return listNino;
 	}
 
-	public void setListNino(List<Niño> listNino) {
+	public void setListNino(List<TerapistaNiño> listNino) {
 		this.listNino = listNino;
 	}
 	
@@ -213,6 +226,30 @@ public class NiñoCotroller {
 
 	public void setTer_nino(TerapistaNiño ter_nino) {
 		this.ter_nino = ter_nino;
+	}
+
+	public String getNombreNino() {
+		return nombreNino;
+	}
+
+	public void setNombreNino(String nombreNino) {
+		this.nombreNino = nombreNino;
+	}
+
+	public String getApeNino() {
+		return apeNino;
+	}
+
+	public void setApeNino(String apeNino) {
+		this.apeNino = apeNino;
+	}
+
+	public SesionDeLogueo getSes() {
+		return ses;
+	}
+
+	public void setSes(SesionDeLogueo ses) {
+		this.ses = ses;
 	}
 
 	

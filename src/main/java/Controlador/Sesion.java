@@ -65,9 +65,10 @@ public class Sesion implements Serializable{
 		System.out.println("login....... Terapista");
 		Terapista t=new Terapista();
 		 t= terDao.buscarTerapista(user, password);
+		 System.out.println(t);
 		if(t!=null){	
 			ses.setUser(t);
-			return "Administrador";
+			return "administrador";
 		}else{
 			return null;
 		}

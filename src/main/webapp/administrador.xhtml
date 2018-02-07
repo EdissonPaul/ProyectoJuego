@@ -8,33 +8,53 @@
 <body> 
 
 	<h:form>
-	<h:panelGrid columns="2" columnClasses="titleCell">
-	Nombre: <h:inputText value="#{niñoCotroller.nino.nombre}" />
-	Apellido: <h:inputText value="#{niñoCotroller.nino.apellido}" />
-	Sexo: <h:inputText value="#{niñoCotroller.nino.sexo}" />
-	Institucion: <h:inputText value="#{niñoCotroller.nino.institucion}" />
-	</h:panelGrid>
-	<h:commandButton value="GUARDAR" action="#{niñoCotroller.guardarNiño()}"/>
+							<!--  <div class="6u 12u$(xsmall)">-->
+										<center>
+										<div class="control-group">
+											<h:outputLabel class="control-label"  value="NOMBRES"/>
+												<div class="controls">
+													<h:inputText class="span11" value="#{niñoCotroller.nombreNino}" id="nom">
+                    								</h:inputText>
+                    							</div>
+											</div>
+											<div class="control-group">
+												<h:outputLabel class="control-label"  value="APELLIDOS"/>
+												<div class="controls">
+													<h:inputText class="span11" value="#{niñoCotroller.apeNino}" id="ape" >
+															</h:inputText>
+                    							</div>
+											</div>
+										
+											</center>				
+								
+						        						<h:commandButton action="#{niñoCotroller.loadNinños()}"  value="search">
+						        						<f:ajax  render="tablaN" execute="ape nom"></f:ajax>
+						        						
+						        						</h:commandButton>
+						         
 	
-	
-	<h:dataTable var="niño" value="#{niñoCotroller.listNino}" styleClass="employeeTable"
+	<h:dataTable id="tablaN" var="tn" value="#{niñoCotroller.listNino}" styleClass="employeeTable"
          headerClass="employeeTableHeader"
          rowClasses="employeeTableOddRow,employeeTableEvenRow">
 	<h:column>
 	<f:facet name="header">Nombre</f:facet>
-	#{niño.nombre}
+	#{tn.niño.nombre}
 	</h:column>
 	<h:column>
 	<f:facet name="header">Apellido</f:facet>
-	#{niño.apellido}
+	#{tn.niño.apellido}
 	</h:column>
 	<h:column>
 	<f:facet name="header">Sexo</f:facet>
-	#{niño.sexo}
+	#{tn.niño.sexo}
 	</h:column>
 	<h:column>
 	<f:facet name="header">Institucion</f:facet>
-	#{niño.institucion}
+	#{tn.niño.institucion}
+	</h:column>
+	<h:column>
+	<f:facet name="header">Usuario</f:facet>
+	#{tn.niño.usuario}
 	</h:column>
 	<h:column>
 	<f:facet name="header">Editar</f:facet>
@@ -45,6 +65,8 @@
 	<h:commandButton value="Eliminar" action="#{niñoCotroller.eliminarNiño(niño.id)}"/>
 	</h:column>
 	</h:dataTable>
+	
+	<h:commandButton value="Registro de niños" action="registro"/>
 	
 	<h:commandButton value="SALIR" action="#{sesion.cerrarSecion()}"/>
 	

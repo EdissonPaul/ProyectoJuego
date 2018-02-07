@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import Modelo.Niño;
+import Modelo.Terapista;
+import Modelo.TerapistaNiño;
 
 
 @Stateless
@@ -88,6 +90,23 @@ public class NiñoDAO {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	
+	public List<TerapistaNiño> getniñoss(int id, String nom,String ape){
+		
+		String jpql = "SELECT tn FROM TerapistaNiño tn join fetch tn.niño n "
+				+ "WHERE tn.terapista.id = :id"
+				+" and n.nombre like :nom "  
+				+" and n.apellido like :ap ";
+				Query q = em.createQuery(jpql,TerapistaNiño.class);
+				q.setParameter("id", id);
+				q.setParameter("nom", "%"+nom+"%");
+				q.setParameter("ap", "%"+ape+"%");
+				List<TerapistaNiño> listado = q.getResultList();
+				System.out.println(listado.size());
+				return listado;
+		
 	}
 	
 	
