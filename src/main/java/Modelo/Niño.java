@@ -10,8 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="niño")
@@ -27,6 +30,9 @@ public class Niño {
 	@Column(name = "nin_apellido",length = 40)
 	private String apellido;
 	
+	@Column(name = "nin_usuario",length = 40)
+	private String usuario;
+	
 	@Column(name = "nin_sexo",length = 40)
 	private String sexo;
 	
@@ -36,6 +42,9 @@ public class Niño {
 	@OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.EAGER)
 	@JoinColumn(name="niño_nin_id")
 	private List<SesionJuego> sesionJuego;
+	
+	@OneToMany(mappedBy="niño")
+	private List<TerapistaNiño> listaTerapistaNiño;
 
 	public int getId() {
 		return id;
@@ -84,6 +93,25 @@ public class Niño {
 	public void setSesionJuego(List<SesionJuego> sesionJuego) {
 		this.sesionJuego = sesionJuego;
 	}
+
+	
+
+	public List<TerapistaNiño> getListaTerapistaNiño() {
+		return listaTerapistaNiño;
+	}
+
+	public void setListaTerapistaNiño(List<TerapistaNiño> listaTerapistaNiño) {
+		this.listaTerapistaNiño = listaTerapistaNiño;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+	
 	
 	
 }

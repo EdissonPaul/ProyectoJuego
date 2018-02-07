@@ -70,4 +70,25 @@ public class NiñoDAO {
 	public Niño getNiño(int id){
 		return em.find(Niño.class,id);
 	}
+	
+	/**
+	 * Verificamos si existe el usuario en la Base de Datos
+	 * @param usuario
+	 * @return
+	 */
+	public Niño verificarUsuarioNiño(String usuario){
+		
+		try{
+			
+			Query q = em.createQuery("SELECT n FROM Niño n WHERE n.usuario LIKE :mi_usuario",Niño.class);
+			q.setParameter("mi_usuario", usuario);
+			Niño n= (Niño) q.getSingleResult();
+			return n;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
 }

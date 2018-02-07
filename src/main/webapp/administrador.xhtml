@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+
+	<h:form>
+	<h:panelGrid columns="2" columnClasses="titleCell">
+	Nombre: <h:inputText value="#{niñoCotroller.nino.nombre}" />
+	Apellido: <h:inputText value="#{niñoCotroller.nino.apellido}" />
+	Sexo: <h:inputText value="#{niñoCotroller.nino.sexo}" />
+	Institucion: <h:inputText value="#{niñoCotroller.nino.institucion}" />
+	</h:panelGrid>
+	<h:commandButton value="GUARDAR" action="#{niñoCotroller.guardarNiño()}"/>
+	
+	
+	<h:dataTable var="niño" value="#{niñoCotroller.listNino}" styleClass="employeeTable"
+         headerClass="employeeTableHeader"
+         rowClasses="employeeTableOddRow,employeeTableEvenRow">
+	<h:column>
+	<f:facet name="header">Nombre</f:facet>
+	#{niño.nombre}
+	</h:column>
+	<h:column>
+	<f:facet name="header">Apellido</f:facet>
+	#{niño.apellido}
+	</h:column>
+	<h:column>
+	<f:facet name="header">Sexo</f:facet>
+	#{niño.sexo}
+	</h:column>
+	<h:column>
+	<f:facet name="header">Institucion</f:facet>
+	#{niño.institucion}
+	</h:column>
+	<h:column>
+	<f:facet name="header">Editar</f:facet>
+	<h:commandButton value="Editar" action="#{niñoCotroller.actualizarNiño(niño.id)}"/>
+	</h:column>
+	<h:column>
+	<f:facet name="header">Eliminar</f:facet>
+	<h:commandButton value="Eliminar" action="#{niñoCotroller.eliminarNiño(niño.id)}"/>
+	</h:column>
+	</h:dataTable>
+	
+	<h:commandButton value="SALIR" action="#{sesion.cerrarSecion()}"/>
+	
+	</h:form>
+	
+	
+	
+</body> 
+</html>

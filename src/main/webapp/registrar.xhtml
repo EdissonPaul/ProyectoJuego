@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"> 
+
+<h:head>
+<title>PIKE APRENDE</title>
+<!-- Meta tags -->
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="package signup Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Meta tag Keywords -->
+
+<link href="resources/registrar/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+<link href="//fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&amp;subset=cyrillic,cyrillic-ext,latin-ext,vietnamese" rel="stylesheet"/>
+</h:head>
+<body>
+<div class="form">
+<h1>PIKE APRENDE</h1>
+	<div class="form-content">
+		<h:form action="#" method="post">
+			<div class="form-info">
+				<h2>Registro Terapista</h2>
+			</div>
+			<div class="name">
+				<label>Nombre</label>
+				<h:inputText class="input1" type="text" name="name" a:placeholder="Nombre" a:required="" value="#{terapistaCotroller.ter.nombre}"/>
+			</div>
+			<div class="email">
+				<label>Apellido</label>
+				<h:inputText  class="input1" type="email" name="email" a:placeholder="Apellido" a:required="" value="#{terapistaCotroller.ter.apellido}"/>
+			</div>
+			<div class="email">
+				<label>Cedula</label>
+				<h:inputText  class="input1" type="email" name="email" a:placeholder="Cedula" a:required="" value="#{terapistaCotroller.ter.cedula}"/>
+			</div>
+			<div class="email">
+				<label>Usuario</label>
+				<h:inputText  class="input1" type="email" name="email" a:placeholder="Usuario" a:required="" value="#{terapistaCotroller.ter.username}"/>
+			</div>
+			<div class="pass1">
+				<label>Clave</label>
+				<h:inputSecret class="input1" type="password" name="password" a:placeholder="**********" a:required="" value="#{terapistaCotroller.ter.password}"/>
+			</div>
+			<div class="pass2">
+				<label>Ingrese de nuevo su clave</label>
+				<h:inputSecret class="input1" type="password" name="confirm pasdsword" a:placeholder="**********" a:required="" value="#{terapistaCotroller.claveInsertada}"/>
+			</div>
+			<div class="signup">
+				<h:commandButton type="submit" value="Registrar" action="#{terapistaCotroller.validarDatosRegistro()}"/>
+			</div>
+		</h:form>
+	</div>
+</div>
+</body>
+</html>

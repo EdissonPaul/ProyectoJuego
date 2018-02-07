@@ -19,7 +19,7 @@ import Negocio.AdministradorDAO;
 @SessionScoped
 public class Sesion implements Serializable{
 	
-	//Para el Login 
+	//Para el TerapistaNiño 
 	private String user;
 	private String password;
 	
@@ -56,13 +56,12 @@ public class Sesion implements Serializable{
 	public String loginAdmin(){
 		System.out.println("login......................");
 		
-		/*listAdmin = adminDao.loginAdmin(user, password);
+		listAdmin = adminDao.loginAdmin(user, password);
 		if(!listAdmin.isEmpty()){	
 			return "administrador";
 		}else{
 			return null;
-		}*/
-		return null;
+		}
 	}
 	
 	/**
