@@ -39,8 +39,7 @@ public class Niño {
 	@Column(name = "nin_institucion",length = 40)
 	private String institucion;
 	
-	@OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.EAGER)
-	@JoinColumn(name="niño_nin_id")
+	@OneToMany(mappedBy="nino")
 	private List<SesionJuego> sesionJuego;
 	
 	@OneToMany(mappedBy="niño")

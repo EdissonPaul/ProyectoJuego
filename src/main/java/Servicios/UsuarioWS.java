@@ -1,5 +1,6 @@
 package Servicios;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,8 +9,20 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import Modelo.Actividad;
+import Modelo.Niño;
+import Modelo.SesionJuego;
+import Negocio.ActividadDAO;
+import Negocio.NiñoDAO;
+
 @Path("usuario")
 public class UsuarioWS {
+	@Inject
+	private NiñoDAO ndao;
+	 
+	@Inject
+	private ActividadDAO actDao; 
+	
 	
 	/*@Inject
 	private UsuarioDAO udao;
@@ -53,4 +66,64 @@ public class UsuarioWS {
 		}*/
 		return true;
 	}
+	
+	@GET
+	@Path("jugador")
+	@Produces("application/json")
+	public int  buscar(@QueryParam("user") String user){
+		System.out.println(user);
+		Niño n=new Niño();
+		n=ndao.verificarUsuarioNiño(user);
+		if(n!=null){
+		//	System.out.println(correo);
+			return n.getId();
+		}
+		return -1;
+	}
+	
+	@GET
+	@Path("jugadores")
+	@Produces("application/json")
+	public List<Niño>  buscar(){
+		List<Niño> l=new ArrayList<Niño>();
+		l=ndao.getNinos();
+		if(l.size()!=0){
+		//	System.out.println(correo);
+			return l;
+		}
+		return null;
+	}
+	
+	@GET
+	@Path("save")
+	@Produces("application/json")
+	public int Guardar(@QueryParam("dato") String dato){
+		SesionJuego sesj=new SesionJuego();
+		Niño n=new Niño();
+		Actividad ac=new Actividad();
+		
+		try {
+		//1*act*tiempo,2;
+		
+			String[] datos=dato.split("*");
+			n=ndao.getNiño(Integer.parseInt(datos[0]));
+			ac=actDao.getActividad(Integer.parseInt(datos[1]));
+			if(n!=null){
+			//	System.out.println(correo);
+				sesj.setNino(n);
+				sesj.setActividad(ac);
+				String [] puntajes=datos[2].split(";");
+				
+			}
+			return 1;		
+			
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			
+			
+			return -1;
+		}
+	}
+	
 }

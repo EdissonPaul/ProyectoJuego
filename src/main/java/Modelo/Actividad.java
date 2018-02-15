@@ -29,8 +29,8 @@ public class Actividad {
 	@Column(name = "act_idepunt")
 	private int idepunt;
 	
-	@OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.EAGER)
-	@JoinColumn(name="actividad_act_id")
+	@OneToMany(mappedBy="actividad")
+	//@JoinColumn(name="actividad_act_id")
 	private List<SesionJuego> sesionJuego;
 	
 	

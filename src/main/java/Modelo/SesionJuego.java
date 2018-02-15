@@ -10,8 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="sesionJuego")
@@ -27,4 +30,68 @@ public class SesionJuego {
 	@OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.EAGER)
 	@JoinColumn(name="sesion_ses_id")
 	private List<Puntajes> puntajes;
+	
+	
+	@ManyToOne
+	@JoinColumn(name="niño_nin_id")
+	@JsonIgnore
+	private Niño nino;
+	
+	@ManyToOne
+	@JoinColumn(name="actividad_act_id")
+	@JsonIgnore
+	private Actividad actividad;
+
+
+	public Actividad getActividad() {
+		return actividad;
+	}
+
+
+	public void setActividad(Actividad actividad) {
+		this.actividad = actividad;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public String getFecha() {
+		return fecha;
+	}
+
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+
+
+	public List<Puntajes> getPuntajes() {
+		return puntajes;
+	}
+
+
+	public void setPuntajes(List<Puntajes> puntajes) {
+		this.puntajes = puntajes;
+	}
+
+
+	public Niño getNino() {
+		return nino;
+	}
+
+
+	public void setNino(Niño nino) {
+		this.nino = nino;
+	}
+	
+	
+	
 }
