@@ -11,6 +11,7 @@ import javax.ws.rs.QueryParam;
 
 import Modelo.Actividad;
 import Modelo.Niño;
+import Modelo.Puntajes;
 import Modelo.SesionJuego;
 import Negocio.ActividadDAO;
 import Negocio.NiñoDAO;
@@ -101,6 +102,7 @@ public class UsuarioWS {
 		SesionJuego sesj=new SesionJuego();
 		Niño n=new Niño();
 		Actividad ac=new Actividad();
+		List<Puntajes> puntuaciones =new ArrayList<Puntajes>();
 		
 		try {
 		//1*act*tiempo,2;
@@ -113,6 +115,15 @@ public class UsuarioWS {
 				sesj.setNino(n);
 				sesj.setActividad(ac);
 				String [] puntajes=datos[2].split(";");
+				for (int i = 0; i < puntajes.length; i++) {
+					String [] valor=puntajes[0].split(",");
+					Puntajes pt=new Puntajes();
+					pt.setNombre(valor[0]);
+					pt.setValor(Integer.parseInt(valor[1]));
+					puntuaciones.add(pt);
+				}
+				sesj.setPuntajes(puntuaciones);
+				
 				
 			}
 			return 1;		
