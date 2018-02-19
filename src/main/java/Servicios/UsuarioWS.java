@@ -1,6 +1,8 @@
 package Servicios;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -80,7 +82,7 @@ public class UsuarioWS {
 		List<Puntajes> puntuaciones =new ArrayList<Puntajes>();
 		
 		try {
-		//1*1*tiempo,2;reconocimiento,2
+		//1*1*tiempo,2
 		
 			String[] datos=dato.split("-");
 			System.out.println(datos[0]+"  "+datos[1]+" "+datos[2]);
@@ -91,7 +93,7 @@ public class UsuarioWS {
 				sesj.setNino(n);
 				sesj.setActividad(ac);
 				String [] puntajes=datos[2].split(";");
-				System.out.println(puntajes[0]+"  "+puntajes[1]);
+				System.out.println(puntajes[0]);
 				for (int i = 0; i < puntajes.length; i++) {
 					String [] valor=puntajes[i].split(",");
 					Puntajes pt=new Puntajes();
@@ -103,6 +105,7 @@ public class UsuarioWS {
 				
 				
 			}
+			sesj.setFecha(obtenerFechaHora());
 			sesDao.saveSesion(sesj);
 			return 1;		
 			
@@ -113,6 +116,21 @@ public class UsuarioWS {
 			
 			return -1;
 		}
+	}
+	
+	
+	public String obtenerFechaHora() {
+		Calendar fecha = new GregorianCalendar();
+        
+        int ano = fecha.get(Calendar.YEAR);
+        int mes = fecha.get(Calendar.MONTH);
+        int dia = fecha.get(Calendar.DAY_OF_MONTH);
+        int hora = fecha.get(Calendar.HOUR_OF_DAY);
+        int minuto = fecha.get(Calendar.MINUTE);
+        int segundo = fecha.get(Calendar.SECOND);
+        
+       String fech=""+dia+"/"+mes+1+"/"+ano+"    "+hora+":"+minuto+":"+segundo;
+		return fech;
 	}
 	
 }
