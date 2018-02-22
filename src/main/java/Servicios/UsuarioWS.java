@@ -77,16 +77,19 @@ public class UsuarioWS {
 	@GET
 	@Path("validar")
 	@Produces("application/json")
-	public String verificar(@QueryParam("str1") String text1,@QueryParam("str2") String text2){
+	public int verificar(@QueryParam("str1") String text1,@QueryParam("str2") String text2){
 		try {
 			String resp=validarPalabras(text1.toUpperCase(), text2.toUpperCase());
-			return resp;
+			if (resp.equals("correcto")){
+				return 1;
+			}
+			return 0;
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		
 		
-		return null;
+		return 0;
 	}
 	
 	@GET
