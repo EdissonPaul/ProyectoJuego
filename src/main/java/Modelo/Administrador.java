@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -12,7 +13,9 @@ import javax.persistence.Table;
 public class Administrador {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@Column(name="adm_id")
+	@SequenceGenerator(name = "ADMINISTRADOR_ID_GENERATOR", sequenceName="SEQ_ADM_ID")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="ADMINISTRADOR_ID_GENERATOR")
 	private int id;
 	
 	@Column(name = "adm_nombre",length = 20)

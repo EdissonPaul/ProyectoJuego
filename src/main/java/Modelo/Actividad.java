@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -20,7 +21,9 @@ import javax.persistence.Table;
 public class Actividad {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@Column(name="act_id")
+	@SequenceGenerator(name = "ACTIVIDAD_ID_GENERATOR", sequenceName="SEQ_ACT_ID")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="ACTIVIDAD_ID_GENERATOR")
 	private int id;
 	
 	@Column(name = "act_nombre",length = 40)
@@ -32,6 +35,38 @@ public class Actividad {
 	@OneToMany(mappedBy="actividad")
 	//@JoinColumn(name="actividad_act_id")
 	private List<SesionJuego> sesionJuego;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public int getIdepunt() {
+		return idepunt;
+	}
+
+	public void setIdepunt(int idepunt) {
+		this.idepunt = idepunt;
+	}
+
+	public List<SesionJuego> getSesionJuego() {
+		return sesionJuego;
+	}
+
+	public void setSesionJuego(List<SesionJuego> sesionJuego) {
+		this.sesionJuego = sesionJuego;
+	}
 	
 	
 }

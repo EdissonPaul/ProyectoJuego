@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,7 +22,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class SesionJuego {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@Column(name="ses_id")
+	@SequenceGenerator(name = "SESION_ID_GENERATOR", sequenceName="SEQ_SES_ID")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="SESION_ID_GENERATOR")
 	private int id;
 	
 	@Column(name = "ses_fecha",length = 40)

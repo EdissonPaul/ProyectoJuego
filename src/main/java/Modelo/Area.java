@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -18,7 +19,9 @@ import javax.persistence.Table;
 public class Area {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@Column(name="are_id")
+	@SequenceGenerator(name = "AREA_ID_GENERATOR", sequenceName="SEQ_ARE_ID")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="AREA_ID_GENERATOR")
 	private int id;
 	
 	@Column(name = "are_nombre",length = 40)

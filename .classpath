@@ -28,6 +28,8 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/JONNATHAN/git/ProyectoJuego/src/main/webapp/resources/librerias/cors-filter-2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/JONNATHAN/git/ProyectoJuego/src/main/webapp/resources/librerias/java-property-utils-1.9.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/JONNATHAN/git/ProyectoJuego/src/main/webapp/resources/librerias/primefaces-6.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/JONNATHAN/git/ProyectoJuego/src/main/webapp/resources/librerias/primefaces-6.1-sources.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
