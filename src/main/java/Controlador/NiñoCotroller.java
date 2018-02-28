@@ -6,10 +6,12 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import Modelo.Administrador;
 import Modelo.Niño;
+import Modelo.SesionJuego;
 import Modelo.Terapista;
 import Modelo.TerapistaNiño;
 import Negocio.AdministradorDAO;
@@ -18,10 +20,12 @@ import Negocio.TerapistaDAO;
 import Negocio.TerapistaNiñoDao;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class NiñoCotroller {
 	
 	private Niño nino;
+	
+	private SesionJuego selectedSesion;
 	
 	private TerapistaNiño ter_nino;
 	
@@ -40,6 +44,8 @@ public class NiñoCotroller {
 	
 	//Lista de ninos
 	private List<TerapistaNiño> listNino;
+	
+	private int id;
 	
 	@Inject
 	private NiñoDAO ninoDao;
@@ -68,6 +74,14 @@ public class NiñoCotroller {
 			listNino=ninoDao.getniñoss(ses.getUser().getId(),nombreNino,apeNino);
 			System.out.println("tamaño de lista niños" +listNino.size());
 		}
+	}
+	
+	public void loadDetalleNiño(int id) {
+		System.out.println("Niño a buscar " +id);
+		nino=ninoDao.getNiño(id);
+		//nino=ninoDao.obtnerNino(id);
+		System.out.println("Niño obtenido detalle " +nino);
+	
 	}
 
 	public Niño getNino() {
@@ -250,6 +264,23 @@ public class NiñoCotroller {
 
 	public void setSes(SesionDeLogueo ses) {
 		this.ses = ses;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+		loadDetalleNiño(id);
+	}
+
+	public SesionJuego getSelectedSesion() {
+		return selectedSesion;
+	}
+
+	public void setSelectedSesion(SesionJuego selectedSesion) {
+		this.selectedSesion = selectedSesion;
 	}
 
 	

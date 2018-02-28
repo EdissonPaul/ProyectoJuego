@@ -70,7 +70,9 @@ public class NiñoDAO {
 	 * @return
 	 */
 	public Niño getNiño(int id){
-		return em.find(Niño.class,id);
+		Niño n=em.find(Niño.class,id);
+		n.getSesionJuego().size();
+		return n;
 	}
 	
 	/**
@@ -84,6 +86,20 @@ public class NiñoDAO {
 			
 			Query q = em.createQuery("SELECT n FROM Niño n WHERE n.usuario LIKE :mi_usuario",Niño.class);
 			q.setParameter("mi_usuario", usuario);
+			Niño n= (Niño) q.getSingleResult();
+			return n;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public Niño obtenerNino(int id){
+		
+		try{
+			
+			Query q = em.createQuery("SELECT n FROM Niño n left join fetch n.sesionJuego s WHERE n.id :id",Niño.class);
+			q.setParameter("id", Niño.class);
 			Niño n= (Niño) q.getSingleResult();
 			return n;
 		}catch (Exception e) {

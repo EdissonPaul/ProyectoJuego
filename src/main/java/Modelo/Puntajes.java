@@ -24,6 +24,12 @@ public class Puntajes {
 	@Column(name = "pun_valor")
 	private int valor;
 
+	@Column(name = "pun_fallo")
+	private int valorFallos;
+	
+	@Column(name = "pun_esperado")
+	private int valorEsperado;
+	
 	public int getId() {
 		return id;
 	}
@@ -46,6 +52,22 @@ public class Puntajes {
 
 	public void setValor(int valor) {
 		this.valor = valor;
+	}
+
+	public int getValorFallos() {
+		return valorFallos;
+	}
+
+	public void setValorFallos(int valorFallos) {
+		this.valorFallos = valorFallos;
+	}
+
+	public int getValorEsperado() {
+		return valorEsperado;
+	}
+
+	public void setValorEsperado(int valorEsperado) {
+		this.valorEsperado = valorEsperado;
 	}
 	
 	

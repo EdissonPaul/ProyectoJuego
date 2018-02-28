@@ -91,18 +91,34 @@
 	<div class="form-content">
 		<h:form action="#" method="post">
 			<div class="form-info">
-				<h2>Logeo Terapista</h2>
+				<h2>Registro Terapista</h2>
+			</div>
+			<div class="name">
+				<label>Nombre</label>
+				<h:inputText class="input1" type="text" name="name" a:placeholder="Nombre" a:required="" value="#{terapistaCotroller.ter.nombre}"/>
+			</div>
+			<div class="email">
+				<label>Apellido</label>
+				<h:inputText  class="input1" type="email" name="email" a:placeholder="Apellido" a:required="" value="#{terapistaCotroller.ter.apellido}"/>
+			</div>
+			<div class="email">
+				<label>Cedula</label>
+				<h:inputText  class="input1" type="email" name="email" a:placeholder="Cedula" a:required="" value="#{terapistaCotroller.ter.cedula}"/>
 			</div>
 			<div class="email">
 				<label>Usuario</label>
-				<h:inputText  class="input1" type="email" name="email" a:placeholder="Usuario" a:required="" value="#{sesion.user}"/>
+				<h:inputText  class="input1" type="email" name="email" a:placeholder="Usuario" a:required="" value="#{terapistaCotroller.ter.username}"/>
 			</div>
 			<div class="pass1">
 				<label>Contraseña</label>
-				<h:inputSecret class="input1" type="password" name="password" a:placeholder="**********" a:required="" value="#{sesion.password}"/>
+				<h:inputSecret class="input1" type="password" name="password" a:placeholder="**********" a:required="" value="#{terapistaCotroller.ter.password}"/>
+			</div>
+			<div class="pass2">
+				<label>Ingrese de nuevo su contraseña</label>
+				<h:inputSecret class="input1" type="password" name="confirm pasdsword" a:placeholder="**********" a:required="" value="#{terapistaCotroller.claveInsertada}"/>
 			</div>
 			<div class="signup">
-				<h:commandButton type="submit" value="INICIAR SESIÓN" action="#{sesion.loginTerapista()}"/>
+				<h:commandButton type="submit" value="Registrar" action="#{terapistaCotroller.validarDatosRegistro()}"/>
 			</div>
 		</h:form>
 	</div>
@@ -112,7 +128,13 @@
 
 
 
-
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+      </div>
+      <!-- /.container -->
+    </footer>
 
     <!-- Bootstrap core JavaScript -->
     <script src="resources/js/jquery.min.js"></script>

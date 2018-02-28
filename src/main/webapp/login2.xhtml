@@ -31,6 +31,7 @@
 	<link rel="stylesheet" type="text/css" href="resources/login2/css/util.css"/>
 	<link rel="stylesheet" type="text/css" href="resources/login2/css/main.css"/>
 <!--===============================================================================================-->
+
 </head>
 <body>
 	
@@ -43,7 +44,7 @@
 				<h:form class="login100-form validate-form p-b-33 p-t-5">
 
 					<div class="wrap-input100 validate-input" a:data-validate = "Enter username">
-						<h:inputText value="#{sesion.user}" class="input100" name="username" a:placeholder="Ingrese RUC"/>
+						<h:inputText value="#{sesion.user}" class="input100" name="username" a:placeholder="Ingrese su Usuario"/>
 						<span class="focus-input100" a:data-placeholder="&#xe82a;"></span>
 					</div>
 
@@ -56,7 +57,7 @@
 
 					<div class="container-login100-form-btn m-t-32">
 					<br/>
-						<h:commandButton action="#{sesion.loginTerapista()}" value="Login"   class="login100-form-btn" />
+						<h:commandButton action="#{sesion.loginTerapista()}" value="INICIAR SESIÓN"   class="login100-form-btn" />
 					</div>
 					<div class="container-login100-form-btn m-t-32">
 						<h:outputLabel value="#{loginControlador.mensajeError}" />

@@ -68,7 +68,7 @@ public class Sesion implements Serializable{
 		 System.out.println(t);
 		if(t!=null){	
 			ses.setUser(t);
-			return "administrador";
+			return "admin.jsf?faces-redirect=true";
 		}else{
 			return null;
 		}

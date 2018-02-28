@@ -77,19 +77,21 @@ public class UsuarioWS {
 	@GET
 	@Path("validar")
 	@Produces("application/json")
-	public int verificar(@QueryParam("str1") String text1,@QueryParam("str2") String text2){
+	public boolean verificar(@QueryParam("str1") String text1,@QueryParam("str2") String text2){
 		try {
 			String resp=validarPalabras(text1.toUpperCase(), text2.toUpperCase());
 			if (resp.equals("correcto")){
-				return 1;
+				System.out.println("correcto.........");
+				return true;
 			}
-			return 0;
+			System.out.println("incorrecto.........");
+			return false;
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		
 		
-		return 0;
+		return false;
 	}
 	
 	@GET
@@ -119,6 +121,28 @@ public class UsuarioWS {
 					Puntajes pt=new Puntajes();
 					pt.setNombre(valor[0]);
 					pt.setValor(Integer.parseInt(valor[1]));
+					if(!valor[2].equals("null")){
+						pt.setValorFallos(Integer.parseInt(valor[2]));
+					}
+					if(!valor[3].equals("null")){
+						pt.setValorEsperado(Integer.parseInt(valor[3]));
+					}
+					/*if(Integer.parseInt(valor[2])==900){
+						valor[2] ="0";
+						System.out.println("valor sale...."+valor[2]);
+						pt.setValorFallos(Integer.parseInt(valor[2]));
+					}else {
+						pt.setValorFallos(Integer.parseInt(valor[2]));
+						System.out.println("valor entra...."+valor[2]);
+					}
+					if(Integer.parseInt(valor[3])==900){
+						valor[3] ="0";
+						System.out.println("valor sale...."+valor[3]);
+						pt.setValorEsperado(Integer.parseInt(valor[3]));
+					}else {
+						pt.setValorEsperado(Integer.parseInt(valor[3]));
+						System.out.println("valor entra...."+valor[3]);
+					}*/				
 					puntuaciones.add(pt);
 				}
 				sesj.setPuntajes(puntuaciones);

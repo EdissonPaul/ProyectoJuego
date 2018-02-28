@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+      <ui:composition template="/WEB-INF/plantillat.xhtml">
+
+<h:head>
+	<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+		<h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head" />
+		  
+	<f:metadata>
+		<f:viewParam name="id" value="#{niñoCotroller.id}" />
+	</f:metadata>
+</h:head> 
+<ui:define name="contenido">
+<body> 
+<h:form id="form">
+<br /><br /><br /><br />
+
+
+<h2>Datos del Niño</h2>
+	<div class="row uniform">
+		<div class="6u 12u$(xsmall)">
+			<label>Nombres</label>
+			<h:outputText class="span11" value="#{niñoCotroller.nino.nombre}"></h:outputText> 
+		</div>
+		<div class="6u 12u$(xsmall)">
+			<label>Apellidos</label>
+			<h:outputText value="#{niñoCotroller.nino.apellido}" />
+		</div>
+		<div class="6u 12u$(xsmall)">
+			<label>Sexo</label>
+			<h:outputText class="span11" value="#{niñoCotroller.nino.sexo}"></h:outputText> 
+		</div>
+		<div class="6u 12u$(xsmall)">
+			<label>Institucion</label>
+			<h:outputText value="#{niñoCotroller.nino.institucion}" />
+		</div>
+	</div>
+<h2>Sesiones </h2>
+
+	<p:dataTable id="tab" var="se" value="#{niñoCotroller.nino.sesionJuego}">
+        <f:facet name="header">
+            Basic
+        </f:facet>
+        
+        <p:column headerText="FECHA">
+            <h:outputText value="#{se.fecha}" />
+        </p:column>
+        <p:column headerText="Brand">
+            <h:outputText value="#{se.actividad.nombre}" />
+        </p:column>
+        <p:column style="width:64px;text-align: center">
+             <p:commandButton update=":form:carDetail" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">
+                <f:setPropertyActionListener value="#{se}" target="#{niñoCotroller.selectedSesion}" />
+            </p:commandButton>
+        </p:column>
+    </p:dataTable>
+    
+    
+    <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+        <p:outputPanel id="carDetail" style="text-align:center;">
+	        <h:dataTable id="puntaje" var="pun" value="#{niñoCotroller.selectedSesion.puntajes}">
+		        <f:facet name="header">
+		            puntajes
+		        </f:facet>
+		        
+		        <h:column>
+					<f:facet name="header">Nombre</f:facet>
+					#{pun.nombre}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Valor</f:facet>
+					#{pun.valor}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Fallos</f:facet>
+					#{pun.valorFallos}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Valor Esperado</f:facet>
+					#{pun.valorEsperado}
+				</h:column>
+	    	</h:dataTable>
+        </p:outputPanel>
+    </p:dialog>
+   
+
+<br /><br />	
+</h:form>
+</body>
+</ui:define> 
+</ui:composition>
+</html>
