@@ -1,5 +1,6 @@
 package Modelo;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -27,8 +30,9 @@ public class SesionJuego {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="SESION_ID_GENERATOR")
 	private int id;
 	
-	@Column(name = "ses_fecha",length = 40)
-	private String fecha;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "ses_fecha")
+	private Date fecha;
 	
 	@OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.EAGER)
 	@JoinColumn(name="sesion_ses_id")
@@ -66,12 +70,12 @@ public class SesionJuego {
 	}
 
 
-	public String getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 
 
-	public void setFecha(String fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 

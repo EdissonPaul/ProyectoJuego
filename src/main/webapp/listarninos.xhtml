@@ -10,10 +10,24 @@
 <body> 
 <h:form>
 <br /><br /><br /><br />
+<h2>Campos de Busqueda</h2>
 
-<div>
-
-</div>
+<div class="row uniform">
+		<div class="6u 12u$(xsmall)">
+			<label>Nombres</label>
+			<h:inputText class="span11" value="#{niñoCotroller.nombreNino}" id="nom"></h:inputText>
+        </div>
+		<div class="6u 12u$(xsmall)">
+			<label>Apellidos</label>
+			<h:inputText class="span11" value="#{niñoCotroller.apeNino}" id="ape" >
+															</h:inputText>
+		</div>
+		
+	</div>
+	<h:commandButton action="#{niñoCotroller.loadNinños()}"  value="search">
+			<f:ajax  render="tablaN" execute="ape nom"></f:ajax>
+						        						
+	</h:commandButton>
 
 	<h:dataTable id="tablaN" var="tn" value="#{niñoCotroller.listNino}" styleClass="employeeTable"
          headerClass="employeeTableHeader"
@@ -43,16 +57,15 @@
 	#{tn.niño.usuario}
 	</h:column>
 	<h:column>
-	<f:facet name="header">Editar</f:facet>
-	<h:commandButton value="Editar" action="#{niñoCotroller.actualizarNiño(niño.id)}"/>
+	
+	<a href="EditarNinos.xhtml?id=#{tn.niño.id}">Edit</a>
 	</h:column>
 	<h:column>
-	<f:facet name="header">Eliminar</f:facet>
-	<h:commandButton value="Eliminar" action="#{niñoCotroller.eliminarNiño(niño.id)}"/>
+	<h:commandButton value="Delete" action="#{niñoCotroller.eliminarNiño(tn.niño.id)}"/>
 	</h:column>
 	
 	<h:column>
-	<a href="DetalleNiño.xhtml?id=#{tn.niño.id}">Ver mas detalle</a>
+	<a href="DetalleNiño.xhtml?id=#{tn.niño.id}">More Details</a>
 	</h:column>
 	</h:dataTable>
 

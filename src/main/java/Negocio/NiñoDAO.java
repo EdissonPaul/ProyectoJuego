@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import Modelo.Niño;
+import Modelo.SesionJuego;
 import Modelo.Terapista;
 import Modelo.TerapistaNiño;
 
@@ -93,19 +94,40 @@ public class NiñoDAO {
 			return null;
 		}
 	}
-	
-	public Niño obtenerNino(int id){
+	public Niño verificarNiño(int id,String usuario){
 		
 		try{
 			
-			Query q = em.createQuery("SELECT n FROM Niño n left join fetch n.sesionJuego s WHERE n.id :id",Niño.class);
-			q.setParameter("id", Niño.class);
+			Query q = em.createQuery("SELECT n FROM Niño n WHERE n.id <> :mi_id and n.usuario LIKE :mi_usuario",Niño.class);
+			q.setParameter("mi_usuario", usuario);
+			q.setParameter("mi_id", id);
 			Niño n= (Niño) q.getSingleResult();
 			return n;
 		}catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public List<SesionJuego> obtenerSesiones(int id,String fecha_in,String fecha_fin){
+		
+		String sql;
+		if(fecha_in.length()==0) {
+			sql = "SELECT * FROM sesionJuego n "
+					+ "WHERE  n.niño_nin_id="+id;
+		}else {
+		
+		sql = "SELECT * FROM sesionJuego n "
+				+ "WHERE  n.ses_fecha BETWEEN to_Date('"+fecha_in+"','DD/MM/YYYY') AND to_Date('"+fecha_fin+"','DD/MM/YYYY') "
+						+ " and n.niño_nin_id="+id;
+		}
+		
+		
+		System.out.println("query cuentas "+ sql);
+		Query q =em.createNativeQuery(sql,SesionJuego.class );
+		List<SesionJuego> lista = q.getResultList();
+		System.out.println(" Tamaño  sesiones "+lista.size());
+		return lista;
 	}
 	
 	

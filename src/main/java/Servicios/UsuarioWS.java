@@ -1,8 +1,11 @@
 package Servicios;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -164,7 +167,7 @@ public class UsuarioWS {
 	
 	
 	
-	public String obtenerFechaHora() {
+	public Date obtenerFechaHora() {
 		Calendar fecha = new GregorianCalendar();
         
         int ano = fecha.get(Calendar.YEAR);
@@ -175,7 +178,22 @@ public class UsuarioWS {
         int segundo = fecha.get(Calendar.SECOND);
         
        String fech=""+dia+"/"+mes+1+"/"+ano+"    "+hora+":"+minuto+":"+segundo;
-		return fech;
+
+		SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		
+		Date d;
+		try {
+			d = formato.parse(fech);
+			return d;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+		
+		
+		
 	}
 	
 	public String validarPalabras(String str1,String str2) {

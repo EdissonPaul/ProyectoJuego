@@ -40,16 +40,32 @@
 		</div>
 	</div>
 <h2>Sesiones </h2>
+<h3>Parametros de Busqueda </h3>
+<div class="row uniform">
+	<div class="6u 12u$(xsmall)">
+		<label>Fecha Inicial</label>
+		<p:calendar id="popup" value="#{niñoCotroller.campof_in}">
+			<p:ajax  event="dateSelect" listener="#{niñoCotroller.loadSesiones(niñoCotroller.nino.id)}"  process="popup" update="tab" ></p:ajax>			
+		</p:calendar>
+ 
+	</div>
+	<div class="6u 12u$(xsmall)">
+			<label>Fecha de Corte</label>
+			<p:calendar value="#{niñoCotroller.campof_fin}" id="ff">
+				<p:ajax  event="dateSelect" listener="#{niñoCotroller.loadSesiones(niñoCotroller.nino.id)}" update="tab" process="ff"></p:ajax>
+            </p:calendar>
+	</div>
+</div>
 
-	<p:dataTable id="tab" var="se" value="#{niñoCotroller.nino.sesionJuego}">
+	<p:dataTable id="tab" var="se" value="#{niñoCotroller.sesionesNino}" emptyMessage="Session not found" filteredValue="#{niñoCotroller.filtersSesions}">
         <f:facet name="header">
             Basic
         </f:facet>
         
-        <p:column headerText="FECHA">
+        <p:column headerText="Fecha">
             <h:outputText value="#{se.fecha}" />
         </p:column>
-        <p:column headerText="Brand">
+        <p:column headerText="Actividad" filterBy="#{se.actividad.nombre}" footerText="contains" filterMatchMode="contains">
             <h:outputText value="#{se.actividad.nombre}" />
         </p:column>
         <p:column style="width:64px;text-align: center">
@@ -60,11 +76,11 @@
     </p:dataTable>
     
     
-    <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+    <p:dialog header="Puntajes" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
         <p:outputPanel id="carDetail" style="text-align:center;">
 	        <h:dataTable id="puntaje" var="pun" value="#{niñoCotroller.selectedSesion.puntajes}">
 		        <f:facet name="header">
-		            puntajes
+		            
 		        </f:facet>
 		        
 		        <h:column>

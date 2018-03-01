@@ -1,12 +1,16 @@
 package Controlador;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import Modelo.Administrador;
@@ -34,6 +38,8 @@ public class NiñoCotroller {
 	private String campoApellido="";
 	private String campoCedula="";
 	
+	private String campoActividad="";
+	
 	private String nombreNino="";
 	private String apeNino="";
 	
@@ -41,6 +47,15 @@ public class NiñoCotroller {
 	private List<Terapista> listaTerapistas;
 	private List<Terapista> selectedTerapistas;
 	
+	private List<SesionJuego> sesionesNino;
+	
+	private List<SesionJuego> filtersSesions;
+	
+	
+	SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+
+	private Date campof_in;//fecha inicial
+	private Date campof_fin;//fecha corte
 	
 	//Lista de ninos
 	private List<TerapistaNiño> listNino;
@@ -59,9 +74,13 @@ public class NiñoCotroller {
 	@Inject
 	private SesionDeLogueo ses;
 	
+	
+	
 	@PostConstruct
 	public void init(){
 		nino = new Niño();
+		sesionesNino=new ArrayList<SesionJuego>();
+		this.campof_fin=new Date();
 		loadNinños();
 	}
 	
@@ -81,6 +100,15 @@ public class NiñoCotroller {
 		nino=ninoDao.getNiño(id);
 		//nino=ninoDao.obtnerNino(id);
 		System.out.println("Niño obtenido detalle " +nino);
+		loadSesiones(id);
+	}
+	public void loadSesiones(int id) {
+		
+		String f="";
+		String ff=formateador.format(campof_fin);
+		if(campof_in!=null)
+			f=""+formateador.format(campof_in);
+		sesionesNino=ninoDao.obtenerSesiones(id, f, ff);
 	
 	}
 
@@ -132,6 +160,20 @@ public class NiñoCotroller {
 		return null;
 	}
 	
+	public String editarNino() {
+		String idUsuario = nino.getUsuario();
+		Niño comprobar = ninoDao.verificarNiño(nino.getId(),idUsuario);
+		if(comprobar!=null){
+			FacesMessage msg = new FacesMessage("Error", "usuario ya existe");
+	        FacesContext.getCurrentInstance().addMessage(null, msg);
+		}else{
+			ninoDao.save(nino);
+			init();
+			return null;
+		}
+		return null;
+	}
+	
 	
 	/**
 	 * Metodo para validar los datos antes de registrar el Terapista
@@ -144,6 +186,8 @@ public class NiñoCotroller {
 		String idUsuario = nino.getUsuario();
 		Niño comprobar = ninoDao.verificarUsuarioNiño(idUsuario);
 		if(comprobar!=null){
+			FacesMessage msg = new FacesMessage("Error", "usuario ya existe");
+	        FacesContext.getCurrentInstance().addMessage(null, msg);
 			errUsuario = "Error, usuario ya registrado.";
 			System.out.println(errUsuario);
 		}
@@ -281,6 +325,46 @@ public class NiñoCotroller {
 
 	public void setSelectedSesion(SesionJuego selectedSesion) {
 		this.selectedSesion = selectedSesion;
+	}
+
+	public Date getCampof_fin() {
+		return campof_fin;
+	}
+
+	public void setCampof_fin(Date campof_fin) {
+		this.campof_fin = campof_fin;
+	}
+
+	public List<SesionJuego> getSesionesNino() {
+		return sesionesNino;
+	}
+
+	public void setSesionesNino(List<SesionJuego> sesionesNino) {
+		this.sesionesNino = sesionesNino;
+	}
+
+	public String getCampoActividad() {
+		return campoActividad;
+	}
+
+	public void setCampoActividad(String campoActividad) {
+		this.campoActividad = campoActividad;
+	}
+
+	public Date getCampof_in() {
+		return campof_in;
+	}
+
+	public void setCampof_in(Date campof_in) {
+		this.campof_in = campof_in;
+	}
+
+	public List<SesionJuego> getFiltersSesions() {
+		return filtersSesions;
+	}
+
+	public void setFiltersSesions(List<SesionJuego> filtersSesions) {
+		this.filtersSesions = filtersSesions;
 	}
 
 	
