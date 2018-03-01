@@ -126,9 +126,12 @@ public class UsuarioWS {
 					pt.setValor(Integer.parseInt(valor[1]));
 					if(!valor[2].equals("null")){
 						pt.setValorFallos(Integer.parseInt(valor[2]));
+					}else {
+						pt.setValor(-1);
 					}
 					if(!valor[3].equals("null")){
 						pt.setValorEsperado(Integer.parseInt(valor[3]));
+						pt.setValorEsperado(-1);
 					}
 					/*if(Integer.parseInt(valor[2])==900){
 						valor[2] ="0";
