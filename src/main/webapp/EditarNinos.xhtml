@@ -15,224 +15,56 @@
 <body> 
 
 <h:form id="form">
-<p:growl id="msgs" showDetail="true" />
 <br /><br /><br /><br />
 
 <div class="form-group">
-<a href="javascript:mostrarTerapistas();" class="btn btn-primary btn-lg enable"><ajax action="#{niñoCotroller.loadTerapistas()}"/>Seleccionar Terapista</a>
 
 </div>
   <div class="form-group">
-    <label for="nombre">Nombre</label>
-    <h:inputText class="form-control"  placeholder="Ingrese Nombre" value="#{niñoCotroller.nino.nombre}"/>
+    <label for="nom">Nombre</label>
+    <h:inputText id="nom" class="form-control"  placeholder="Ingrese Nombre" value="#{niñoCotroller.nino.nombre}"/>
+ 	<h:message for="nom"/>
   </div>
     <div class="form-group">
-    <label for="apellido">Apellido</label>
-    <h:inputText class="form-control"  placeholder="Ingrese Apellido" value="#{niñoCotroller.nino.apellido}"/>
+    <label for="ape">Apellido</label>
+    <h:inputText id="ape" class="form-control"  placeholder="Ingrese Apellido" value="#{niñoCotroller.nino.apellido}"/>
+  	<h:message for="ape"/>
   </div>
   <div class="form-group">
     <label for="sexo">Sexo</label>
-    <h:inputText class="form-control"  placeholder="Ingrese Sexo" value="#{niñoCotroller.nino.sexo}"/>
+    <h:inputText id="sexo" class="form-control"  placeholder="Ingrese Sexo" value="#{niñoCotroller.nino.sexo}"/>
+    <h:message for="sexo"/>
   </div>
   <div class="form-group">
     <label for="usuario">Usuario</label>
-    <h:inputText  class="form-control"  placeholder="Ingrese Usuario" value="#{niñoCotroller.nino.usuario}"/>
+    <h:inputText  id="usuario" class="form-control"  placeholder="Ingrese Usuario solo Alfanumerico" value="#{niñoCotroller.nino.usuario}"/>
+    <h:message for="usuario"/>
   </div>
-    <div class="form-group">
-    <label for="institucion">Institucion</label>
-    <h:inputText class="form-control"  placeholder="Ingrese Institucion" value="#{niñoCotroller.nino.institucion}"/>
+  <div class="form-group">
+    <label for="ins">Institucion</label>
+    <h:inputText id="ins" class="form-control"  placeholder="Ingrese Institucion" value="#{niñoCotroller.nino.institucion}"/>
+  	<h:message for="ins"/>
+  </div>
+  <div>
+  <label for="ff" >Fecha de Nacimiento</label>
+			<p:calendar value="#{niñoCotroller.nino.edad}" id="ff">
+				<p:ajax  event="dateSelect" listener="#{niñoCotroller.loadSesiones(niñoCotroller.nino.id)}"  process="ff"></p:ajax>
+            </p:calendar>
+            <h:message for="ff"/>
   </div>
   
   <p></p>
 	<h:outputText value="#{niñoCotroller.errUsuario}" />
 	<p></p>
+	<p></p>
+	<h:outputText id="error" value="#{niñoCotroller.errUsuario}" />
+	<p></p>
   <p:commandButton class="btn btn-primary" value="Registrar" action="#{niñoCotroller.editarNino()}">
-   <p:ajax process="@this" update=":form:msgs" />
+   <p:ajax process="@this" update="error" />
    </p:commandButton>
 </h:form>
 
-	<script>
-			function mostrarTerapistas(){
-					document.getElementById('terapistas').style.display='block';document.getElementById('fadec').style.display='block';
-			}
-			function quitarTerapistas(){
-					document.getElementById('terapistas').style.display='none';document.getElementById('fadec').style.display='none';
-			}
-	</script>
 	
-	<div id="fade" class="black_overlay"></div>
-				<style>
-					.black_overlay {
-					  display: none;
-					  position: absolute;
-					  top: 0%;
-					  left: 0%;
-					  width: 100%;
-					  height: 100%;
-					  background-color: black;
-					  z-index: 1001;
-					  -moz-opacity: 0.8;
-					  opacity: .80;
-					  filter: alpha(opacity=80);
-					}
-					.white_content {
-					  display: none;
-					  position: absolute;
-					  top: 15%;
-					  left: 15%;
-					  width: 70%;
-					  height: 70%;
-					  padding: 16px;
-					  border: 16px solid #1F5E72;
-					  background-color: white;
-					  z-index: 1002;
-					  overflow: auto;
-					}
-					#close {
-					    display:block;
-    					position:absolute;
-    					top:-0px;
-    					right:-0px;
-    					width:27px;
-    					height:27px;
-    					background:url('http://cdn-sg1.pgimgs.com/images/pg/close-button.png') no-repeat center center;
-
-					}
-					#close:hover {
-					    display:block;
-    					position:absolute;
-    					top:2px;
-    					right:2px;
-    					width:27px;
-    					height:27px;
-    					transition-property: height, width, box-shadow, background-color, font-size;
-  						box-shadow: 2px 2px 10px black, 0 0 0 9999px rgba(128,128,128,.5);
-    					background:url('http://cdn-sg1.pgimgs.com/images/pg/close-button.png') no-repeat center center;
-					}
-					
-					#closeu {
-					    display:block;
-    					position:absolute;
-    					top:-0px;
-    					right:-0px;
-    					width:27px;
-    					height:27px;
-    					background:url('http://cdn-sg1.pgimgs.com/images/pg/close-button.png') no-repeat center center;
-
-					}
-					#closeu:hover {
-					    display:block;
-    					position:absolute;
-    					top:2px;
-    					right:2px;
-    					width:27px;
-    					height:27px;
-    					transition-property: height, width, box-shadow, background-color, font-size;
-  						box-shadow: 2px 2px 10px black, 0 0 0 9999px rgba(128,128,128,.5);
-    					background:url('http://cdn-sg1.pgimgs.com/images/pg/close-button.png') no-repeat center center;
-					}
-					#closec {
-					    display:block;
-    					position:absolute;
-    					top:-0px;
-    					right:-0px;
-    					width:27px;
-    					height:27px;
-    					background:url('http://cdn-sg1.pgimgs.com/images/pg/close-button.png') no-repeat center center;
-
-					}
-					#closec:hover {
-					    display:block;
-    					position:absolute;
-    					top:2px;
-    					right:2px;
-    					width:27px;
-    					height:27px;
-    					transition-property: height, width, box-shadow, background-color, font-size;
-  						box-shadow: 2px 2px 10px black, 0 0 0 9999px rgba(128,128,128,.5);
-    					background:url('http://cdn-sg1.pgimgs.com/images/pg/close-button.png') no-repeat center center;
-					}
-				</style>
-				
-				
-								<div id="terapistas" class="white_content">
-					<span id="closec" onclick="document.getElementById('terapistas').style.display='none';document.getElementById('fadec').style.display='none'"></span>
-					<div id="category"></div>
-					<h2>Terapistas</h2>	
-						<h:form id="formcat">
-							<!--  <div class="6u 12u$(xsmall)">-->
-										<center>
-										<div class="control-group">
-											<h:outputLabel class="control-label"  value="NOMBRES"/>
-												<div class="controls">
-													<h:inputText class="span11" value="#{niñoCotroller.campoNombre}" id="nom">
-														<f:ajax  event="keyup" listener="#{niñoCotroller.loadTerapistas()}" render="tabla" execute="codC"></f:ajax>
-                    								</h:inputText>
-                    							</div>
-											</div>
-											<div class="control-group">
-												<h:outputLabel class="control-label"  value="APELLIDOS"/>
-												<div class="controls">
-													<h:inputText class="span11" value="#{niñoCotroller.campoApellido}" id="ape" >
-															<f:ajax  event="keyup" listener="#{niñoCotroller.loadTerapistas()}" render="tabla" execute="cedu"></f:ajax>
-                    								</h:inputText>
-                    							</div>
-											</div>
-											<div class="control-group">
-												<h:outputLabel class="control-label"  value="CEDULA"/>
-												<div class="controls">
-													<h:inputText class="span11" value="#{niñoCotroller.campoCedula}" id="ema" onkeypress="if (event.keyCode == 13) {onchange(); return false; }">
-														<f:ajax  event="change" listener="#{niñoCotroller.loadTerapistas()}" render="tabla" execute="ncl"></f:ajax>
-                 									</h:inputText>
-                 								</div>															
-                    						</div>
-											</center>				
-								
-						        		<p:dataTable id="tabla" var="ter" value="#{niñoCotroller.listaTerapistas}" paginator="true" rows="10" 
-													                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-													                 rowsPerPageTemplate="5,10,15"  style="margin-bottom:20px" selection="#{niñoCotroller.selectedTerapistas}" rowKey="#{ter.id}">
-													                <f:facet name="header">
-																	        Lista de estado de cuentas
-																	 
-																	        <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
-																	        <p:columnToggler datasource="tabla" trigger="toggler" />
-																	</f:facet> 
-													                
-													                
-													            <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
-        
-																<p:column headerText="cedula" >
-																 <h:outputText value="#{ter.cedula}" />
-																</p:column>
-															
-																<p:column headerText="NOMBRES">
-																<h:outputText value="#{ter.nombre}" />
-																</p:column>
-																
-																
-																<p:column headerText="APELLIDO">
-																
-																<h:outputText value="#{ter.apellido}" />
-																
-																</p:column>
-																 
-																
-																
-																<f:facet name="footer">
-																<p:commandButton action="#{niñoCotroller.MostrarTerapistasSeleccionadas()}"  value="DONE"
-														            onclick="javascript:quitarDivcategorias()">
-														            <p:ajax process="@this" update="@none"/>
-														            </p:commandButton>
-															    </f:facet>
-																
-																
-															</p:dataTable>
-															
-						          </h:form>	
-						<h1 align="center"><a onclick="javascript:quitarTerapistas()">Cancel</a></h1>
-					</div>
-					<div id="fadec" class="black_overlay"></div>
-
 <br /><br />
 </body>
 </ui:define>

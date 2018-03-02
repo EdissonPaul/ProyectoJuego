@@ -216,15 +216,21 @@ public class NiñoCotroller {
 	}
 	
 	public String editarNino() {
-		String idUsuario = nino.getUsuario();
-		Niño comprobar = ninoDao.verificarNiño(nino.getId(),idUsuario);
-		if(comprobar!=null){
-			FacesMessage msg = new FacesMessage("Error", "usuario ya existe");
-	        FacesContext.getCurrentInstance().addMessage(null, msg);
+		if(!nino.getNombre().equals("") && !nino.getApellido().equals("") && !nino.getUsuario().equals("") &&!nino.getInstitucion().equals("") &&!nino.getSexo().equals("") && nino.getEdad() !=null){
+	      
+			String idUsuario = nino.getUsuario();
+			Niño comprobar = ninoDao.verificarNiño(nino.getId(),idUsuario);
+			if(comprobar!=null){
+		        errUsuario = "Error , usuario ya existe";
+			}else{
+				ninoDao.save(nino);
+		        errUsuario = "Registro Modificado con exito";
+				init();
+				return null;
+			}
+			  errUsuario = "Error , usuario ya existe";
 		}else{
-			ninoDao.save(nino);
-			init();
-			return null;
+			errUsuario = "Error , Campos Vacios";
 		}
 		return null;
 	}
@@ -241,6 +247,10 @@ public class NiñoCotroller {
 		
 		
 		errUsuario = "";
+		
+		if(nino.getNombre().equals("") || nino.getApellido().equals("") || nino.getUsuario().equals("") || nino.getInstitucion().equals("") || nino.getSexo().equals("") || nino.getEdad() ==null){
+			errUsuario = "Campos Vacios";
+		}
 		
 		// Validamos el username
 		String idUsuario = nino.getUsuario();

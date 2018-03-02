@@ -17,6 +17,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -31,26 +32,33 @@ public class Niño {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="NIÑO_ID_GENERATOR")
 	private int id;
 	
+	@NotNull
 	@Column(name = "nin_nombre",length = 40)
 	private String nombre;
 	
+	@NotNull
 	@Column(name = "nin_apellido",length = 40)
 	private String apellido;
 	
+	@NotNull
 	@Pattern(regexp="[A-Za-z0-9]+", message="Solamente caracteres Alfanumerico.")
 	@Column(name = "nin_usuario",length = 40)
 	private String usuario;
 	
+	@NotNull
 	@Column(name = "nin_sexo",length = 40)
 	private String sexo;
 	
+	@NotNull
 	@Column(name = "nin_institucion",length = 40)
 	private String institucion;
 	
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@Column(name = "nin_fechanac")
 	private Date edad;
 	
+	@NotNull
 	@OneToMany(mappedBy="nino")
 	private List<SesionJuego> sesionJuego;
 	

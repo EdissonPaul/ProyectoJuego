@@ -19,15 +19,18 @@
 </div>
   <div class="form-group">
     <label for="nombre">Nombre</label>
-    <h:inputText class="form-control"  placeholder="Ingrese Nombre" value="#{niñoCotroller.nino.nombre}"/>
+    <h:inputText id="nom" class="form-control"  placeholder="Ingrese Nombre" value="#{niñoCotroller.nino.nombre}"/>
+ 	<h:message for="nom"/>
   </div>
     <div class="form-group">
     <label for="apellido">Apellido</label>
-    <h:inputText class="form-control"  placeholder="Ingrese Apellido" value="#{niñoCotroller.nino.apellido}"/>
+    <h:inputText id="ape" class="form-control"  placeholder="Ingrese Apellido" value="#{niñoCotroller.nino.apellido}"/>
+  	<h:message for="ape"/>
   </div>
   <div class="form-group">
     <label for="sexo">Sexo</label>
-    <h:inputText class="form-control"  placeholder="Ingrese Sexo" value="#{niñoCotroller.nino.sexo}"/>
+    <h:inputText id="sexo" class="form-control"  placeholder="Ingrese Sexo" value="#{niñoCotroller.nino.sexo}"/>
+    <h:message for="sexo"/>
   </div>
   <div class="form-group">
     <label for="usuario">Usuario</label>
@@ -36,13 +39,15 @@
   </div>
   <div class="form-group">
     <label for="institucion">Institucion</label>
-    <h:inputText class="form-control"  placeholder="Ingrese Institucion" value="#{niñoCotroller.nino.institucion}"/>
+    <h:inputText id="ins" class="form-control"  placeholder="Ingrese Institucion" value="#{niñoCotroller.nino.institucion}"/>
+  	<h:message for="ins"/>
   </div>
   <div>
   <label>Fecha de Nacimiento</label>
 			<p:calendar value="#{niñoCotroller.nino.edad}" id="ff">
 				<p:ajax  event="dateSelect" listener="#{niñoCotroller.loadSesiones(niñoCotroller.nino.id)}"  process="ff"></p:ajax>
             </p:calendar>
+            <h:message for="ff"/>
   </div>
   
   <p></p>

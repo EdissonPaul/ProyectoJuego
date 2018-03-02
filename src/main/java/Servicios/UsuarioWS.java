@@ -61,7 +61,7 @@ public class UsuarioWS {
 		//	System.out.println(correo);
 			return n.getId();
 		}
-		return -1;
+		return 0;
 	}
 	
 	@GET
