@@ -19,14 +19,23 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    
     <link rel="stylesheet" href="resources/css/main.css" />
+    
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+ 
 <link href="resources/css/StyleSheet.css" rel="stylesheet" />		
+
+
 <title>CSS3 Contact Form</title>
+  
 <link href="resources/css/style.css" rel="stylesheet" type="text/css" media="screen" />
 	
+   
 
+   <f:event listener="#{plantillaController.verificarUsuario()}" type="preRenderView"></f:event>
+	
    
 	
 
@@ -45,7 +54,7 @@
               <a class="nav-link" href="#{appController.path}/admin.jsf">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#{appController.path}/login.jsf">Mis Datos</a>
+              <a class="nav-link" href="#{appController.path}/datosterapista.jsf">Mis Datos</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#{appController.path}/listarninos.jsf">Listar Niños</a>
@@ -53,9 +62,10 @@
             <li class="nav-item">
               <a class="nav-link" href="#{appController.path}/registrarninos.jsf">Registar Niños</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#{appController.path}/registra.jsf">Salir</a>
-            </li>
+            
+            <h:form>
+            <h:commandButton action="#{sesion.cerrarSecion()}" value="Log Out" />
+            </h:form>
             <!--  
             <li class="nav-item">
               <a class="nav-link" href="#{appController.path}/login.jsf">Iniciar Sesion</a>

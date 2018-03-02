@@ -101,6 +101,7 @@ public class UsuarioWS {
 	@Path("save")
 	@Produces("application/json")
 	public int Guardar(@QueryParam("dato") String dato){
+		System.out.println(dato+" a guardar");
 		SesionJuego sesj=new SesionJuego();
 		Niño n=new Niño();
 		Actividad ac=new Actividad();
@@ -109,8 +110,10 @@ public class UsuarioWS {
 		try {
 		//1*1*tiempo,2
 		
-			String[] datos=dato.split("-");
-			System.out.println(datos[0]+"  "+datos[1]+" "+datos[2]);
+			String[] datos=dato.split(":");
+			System.out.println(datos[0]);
+			System.out.println(datos[1]);
+			System.out.println(datos[2]);
 			n=ndao.getNiño(Integer.parseInt(datos[0]));
 			ac=actDao.getActividad(Integer.parseInt(datos[1]));
 			if(n!=null){
@@ -125,12 +128,15 @@ public class UsuarioWS {
 					pt.setNombre(valor[0]);
 					pt.setValor(Integer.parseInt(valor[1]));
 					if(!valor[2].equals("null")){
+						System.out.println("valor fallos....."+valor[3]);
 						pt.setValorFallos(Integer.parseInt(valor[2]));
 					}else {
-						pt.setValor(-1);
+						pt.setValorFallos(-1);
 					}
 					if(!valor[3].equals("null")){
+						System.out.println("valor esperado....."+valor[3]);
 						pt.setValorEsperado(Integer.parseInt(valor[3]));
+					}else{
 						pt.setValorEsperado(-1);
 					}
 					/*if(Integer.parseInt(valor[2])==900){
@@ -181,12 +187,12 @@ public class UsuarioWS {
         int segundo = fecha.get(Calendar.SECOND);
         
        String fech=""+dia+"/"+mes+1+"/"+ano+"    "+hora+":"+minuto+":"+segundo;
-
+       Date dat=new Date();
 		SimpleDateFormat formato=new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		
 		Date d;
 		try {
-			d = formato.parse(fech);
+			d = formato.parse(formato.format(dat));
 			return d;
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block

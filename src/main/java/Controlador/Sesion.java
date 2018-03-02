@@ -25,6 +25,7 @@ public class Sesion implements Serializable{
 	private String user;
 	private String password;
 	
+	private Terapista t;
 
 	@Inject
 	private SesionDeLogueo ses;
@@ -57,16 +58,30 @@ public class Sesion implements Serializable{
 	}
 	
 	
+	public Terapista getT() {
+		int id = t.getId();
+		t = terDao.perfil(id);
+		return t;
+	}
+
+	public void setT(Terapista t) {
+		this.t = t;
+	}
+
+	
 	/**
 	 * Metodo de logeo del usuario administrador
 	 * @return si se cumple la condicion returna pagina del administrados caso contrario retorna usuario o contraseña incorrecto
 	 */
 	public String loginTerapista(){
 		System.out.println("login....... Terapista");
-		Terapista t=new Terapista();
+		
 		 t= terDao.buscarTerapista(user, password);
 		 System.out.println(t);
 		if(t!=null){	
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", t);
+			//HttpSession session =Util.getSession();
+	        //session.setAttribute("username",user);
 			ses.setUser(t);
 			return "admin.jsf?faces-redirect=true";
 		}else{

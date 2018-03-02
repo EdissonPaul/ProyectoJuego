@@ -32,6 +32,9 @@ public class Actividad {
 	@Column(name = "act_idepunt")
 	private int idepunt;
 	
+	@Column(name="act_descripcion")
+	private String descripcion;
+	
 	@OneToMany(mappedBy="actividad")
 	//@JoinColumn(name="actividad_act_id")
 	private List<SesionJuego> sesionJuego;
@@ -66,6 +69,14 @@ public class Actividad {
 
 	public void setSesionJuego(List<SesionJuego> sesionJuego) {
 		this.sesionJuego = sesionJuego;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 	
 	

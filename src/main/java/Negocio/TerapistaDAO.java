@@ -105,4 +105,10 @@ public class TerapistaDAO {
 	
 	}
 	
+	public Terapista perfil(int id){
+		Terapista t=new Terapista();
+		t = em.find(Terapista.class, id);
+		return t;
+	}
+	
 }

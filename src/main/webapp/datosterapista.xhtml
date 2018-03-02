@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+      <ui:composition template="/WEB-INF/plantillat.xhtml"> 
+
+<h:head></h:head> 
+<ui:define name="contenido">
+<body> 
+<br /><br /><br /><br />
+Bienvenid@: <b><h:outputText value="#{sesion.user}" /></b> 
+
+<h:dataTable value="#{sesion.t}" var="ter" class="table">
+		<h:column>
+			<f:facet name="header">Nombres</f:facet>
+			#{ter.nombre}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Apellidos</f:facet>
+			#{ter.apellido}
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">Cedula</f:facet>
+			#{ter.cedula}
+		</h:column>
+		</h:dataTable>
+
+<br /><br />
+</body>
+</ui:define> 
+</ui:composition>
+</html>

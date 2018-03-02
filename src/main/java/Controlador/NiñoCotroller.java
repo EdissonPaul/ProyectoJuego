@@ -11,6 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
 import Modelo.Administrador;
@@ -34,6 +35,7 @@ public class NiñoCotroller {
 	private TerapistaNiño ter_nino;
 	
 	private String errUsuario;
+	private String errEdad;
 	private String campoNombre="";
 	private String campoApellido="";
 	private String campoCedula="";
@@ -43,6 +45,22 @@ public class NiñoCotroller {
 	private String nombreNino="";
 	private String apeNino="";
 	
+	private String anos;
+	
+	private SelectItem[] opciones = new SelectItem[]{new SelectItem("01", "Enero"),
+	        new SelectItem("02", "Febrero"),
+	        new SelectItem("03", "Marzo"),
+	        new SelectItem("04", "Abril"),
+	        new SelectItem("05", "Mayo"),
+	        new SelectItem("06", "Junio"),
+	        new SelectItem("07", "Julio"),
+	        new SelectItem("08", "Agosto"),
+	        new SelectItem("09", "Septiembre"),
+	        new SelectItem("10", "Octubre"),
+	        new SelectItem("11", "Noviembre"),
+	        new SelectItem("12", "Diciembre")};
+	 
+    private String opcionActual;
 	
 	private List<Terapista> listaTerapistas;
 	private List<Terapista> selectedTerapistas;
@@ -80,10 +98,47 @@ public class NiñoCotroller {
 	public void init(){
 		nino = new Niño();
 		sesionesNino=new ArrayList<SesionJuego>();
+		selectedTerapistas=new ArrayList<Terapista>();
+		if(selectedTerapistas.isEmpty())
+			selectedTerapistas.add(ses.getUser());
 		this.campof_fin=new Date();
 		loadNinños();
 	}
 	
+	
+	
+	public SelectItem[] getOpciones() {
+		return opciones;
+	}
+
+
+
+	public void setOpciones(SelectItem[] opciones) {
+		this.opciones = opciones;
+	}
+
+
+
+	public String getOpcionActual() {
+		return opcionActual;
+	}
+
+
+
+	public void setOpcionActual(String opcionActual) {
+		this.opcionActual = opcionActual;
+	}
+	
+
+	public String getAnos() {
+		return anos;
+	}
+
+	public void setAnos(String anos) {
+		this.anos = anos;
+	}
+
+
 	public void loadTerapistas() {
 		listaTerapistas=terDao.getTerapistas(campoNombre,campoApellido,campoCedula);
 	}
@@ -180,6 +235,11 @@ public class NiñoCotroller {
 	 * @return
 	 */
 	public String validarDatosRegistro(){
+		
+	//	String anos =this.anos;
+		
+		
+		
 		errUsuario = "";
 		
 		// Validamos el username
@@ -211,8 +271,6 @@ public class NiñoCotroller {
 		}else {
 			return null;
 		}
-		
-		
 	}
 	
 	public void MostrarTerapistasSeleccionadas() {

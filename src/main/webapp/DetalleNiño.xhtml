@@ -68,6 +68,9 @@
         <p:column headerText="Actividad" filterBy="#{se.actividad.nombre}" footerText="contains" filterMatchMode="contains">
             <h:outputText value="#{se.actividad.nombre}" />
         </p:column>
+        <p:column headerText="Descripcion" filterBy="#{se.actividad.descripcion}" footerText="contains" filterMatchMode="contains">
+            <h:outputText value="#{se.actividad.descripcion}" />
+        </p:column>
         <p:column style="width:64px;text-align: center">
              <p:commandButton update=":form:carDetail" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">
                 <f:setPropertyActionListener value="#{se}" target="#{niñoCotroller.selectedSesion}" />

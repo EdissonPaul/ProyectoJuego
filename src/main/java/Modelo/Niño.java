@@ -1,5 +1,6 @@
 package Modelo;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -33,6 +37,7 @@ public class Niño {
 	@Column(name = "nin_apellido",length = 40)
 	private String apellido;
 	
+	@Pattern(regexp="[A-Za-z0-9]+", message="Solamente caracteres Alfanumerico.")
 	@Column(name = "nin_usuario",length = 40)
 	private String usuario;
 	
@@ -41,6 +46,10 @@ public class Niño {
 	
 	@Column(name = "nin_institucion",length = 40)
 	private String institucion;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "nin_fechanac")
+	private Date edad;
 	
 	@OneToMany(mappedBy="nino")
 	private List<SesionJuego> sesionJuego;
@@ -112,6 +121,14 @@ public class Niño {
 
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
+	}
+
+	public Date getEdad() {
+		return edad;
+	}
+
+	public void setEdad(Date edad) {
+		this.edad = edad;
 	}
 	
 	
