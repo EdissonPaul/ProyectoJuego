@@ -58,7 +58,7 @@ public class Niño {
 	@Column(name = "nin_fechanac")
 	private Date edad;
 	
-	@NotNull
+	
 	@OneToMany(mappedBy="nino")
 	private List<SesionJuego> sesionJuego;
 	

@@ -276,6 +276,7 @@ public class NiñoCotroller {
 				ter_nino.setNiño(registrado);
 				tnDao.save(ter_nino);
 			}
+			errUsuario="Se ha guardado un nuevo Registro ";
 			init();
 			return null;
 		}else {
