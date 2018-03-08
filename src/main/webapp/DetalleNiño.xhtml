@@ -57,7 +57,8 @@
 	</div>
 </div>
 
-	<p:dataTable id="tab" var="se" value="#{niñoCotroller.sesionesNino}" emptyMessage="Session not found" filteredValue="#{niñoCotroller.filtersSesions}">
+	<p:dataTable id="tab" var="se" paginator="true" rows="10"  paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+													                 rowsPerPageTemplate="5,10,15"  style="margin-bottom:20px" value="#{niñoCotroller.sesionesNino}" emptyMessage="Session not found" filteredValue="#{niñoCotroller.filtersSesions}">
         <f:facet name="header">
             Basic
         </f:facet>
