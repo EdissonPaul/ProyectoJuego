@@ -52,6 +52,10 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 				<label>Ingrese de nuevo su clave</label>
 				<h:inputSecret class="input1" type="password" name="confirm pasdsword" a:placeholder="**********" a:required="" value="#{terapistaCotroller.claveInsertada}"/>
 			</div>
+			<div class="pass2">
+				<label>Ingrese de nuevo su clave</label>
+				<h:outputLabel  class="input1"  name="mesg" value="#{terapistaCotroller.errorMsg}"/>
+			</div>
 			<div class="signup">
 				<h:commandButton type="submit" value="Registrar" action="#{terapistaCotroller.validarDatosRegistro()}"/>
 			</div>

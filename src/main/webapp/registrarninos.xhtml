@@ -10,11 +10,11 @@
 <ui:define name="contenido">
 <body> 
 
-<h:form>
+<h:form id="formNiño">
 <br /><br /><br /><br />
 
 <div class="form-group">
-<a href="javascript:mostrarTerapistas();" class="btn btn-primary btn-lg enable"><ajax action="#{niñoCotroller.loadTerapistas()}"/>Seleccionar Terapista</a>
+<a href="javascript:mostrarTerapistas();" class="btn btn-primary btn-lg enable"><!--  <ajax action="#{niñoCotroller.loadTerapistas()}"/>-->Seleccionar Terapista</a>
 
 </div>
   <div class="form-group">
@@ -54,6 +54,38 @@
 	<h:outputText value="#{niñoCotroller.errUsuario}" />
 	<p></p>
   <h:commandButton  class="btn btn-primary" value="Registrar" action="#{niñoCotroller.validarDatosRegistro()}"/>
+  <br />
+  <h3> Educadores Seleccionados</h3>
+<h:dataTable  id="tablaTerSel" var="ter" value="#{niñoCotroller.selectedTerapistas}" paginator="true" rows="10" 
+													                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+													                 rowsPerPageTemplate="5,10,15"  style="margin-bottom:20px">
+													               
+																<h:column headerText="cedula" >
+																 <h:outputText value="#{ter.cedula}" />
+																</h:column>
+															
+																<h:column headerText="NOMBRES">
+																<h:outputText value="#{ter.nombre}" />
+																</h:column>
+																
+																
+																<h:column headerText="APELLIDO">
+																
+																<h:outputText value="#{ter.apellido}" />
+																
+																</h:column>
+																
+																<h:column headerText="APELLIDO">
+																
+																<h:commandButton value="Quitar" action="#{niñoCotroller.deleteTer(ter)}">
+																<f:ajax render=":formNiño" execute="@this">
+																
+																</f:ajax></h:commandButton>
+																
+																</h:column>
+																
+															</h:dataTable>
+											
 </h:form>
 
 	<script>
@@ -167,72 +199,63 @@
 						<h:form id="formcat">
 							<!--  <div class="6u 12u$(xsmall)">-->
 										<center>
-										<div class="control-group">
-											<h:outputLabel class="control-label"  value="NOMBRES"/>
-												<div class="controls">
-													<h:inputText class="span11" value="#{niñoCotroller.campoNombre}" id="nom">
-														<f:ajax  event="keyup" listener="#{niñoCotroller.loadTerapistas()}" render="tabla" execute="codC"></f:ajax>
-                    								</h:inputText>
-                    							</div>
-											</div>
-											<div class="control-group">
-												<h:outputLabel class="control-label"  value="APELLIDOS"/>
-												<div class="controls">
-													<h:inputText class="span11" value="#{niñoCotroller.campoApellido}" id="ape" >
-															<f:ajax  event="keyup" listener="#{niñoCotroller.loadTerapistas()}" render="tabla" execute="cedu"></f:ajax>
-                    								</h:inputText>
-                    							</div>
-											</div>
+										
+											
 											<div class="control-group">
 												<h:outputLabel class="control-label"  value="CEDULA"/>
 												<div class="controls">
 													<h:inputText class="span11" value="#{niñoCotroller.campoCedula}" id="ema" onkeypress="if (event.keyCode == 13) {onchange(); return false; }">
-														<f:ajax  event="change" listener="#{niñoCotroller.loadTerapistas()}" render="tabla" execute="ncl"></f:ajax>
-                 									</h:inputText>
+													</h:inputText>
                  								</div>															
                     						</div>
 											</center>				
-								
-						        		<p:dataTable id="tabla" var="ter" value="#{niñoCotroller.listaTerapistas}" paginator="true" rows="10" 
+										<h:commandButton action="#{niñoCotroller.loadTerapistas()}"  value="Buscar">
+														            <f:ajax execute="ema" render="tabla"/>
+										</h:commandButton>
+						        		<h:dataTable id="tabla" var="ter" value="#{niñoCotroller.listaTerapistas}" paginator="true" rows="10" 
 													                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-													                 rowsPerPageTemplate="5,10,15"  style="margin-bottom:20px" selection="#{niñoCotroller.selectedTerapistas}" rowKey="#{ter.id}">
+													                 rowsPerPageTemplate="5,10,15"  style="margin-bottom:20px" >
 													                <f:facet name="header">
-																	        Lista de estado de cuentas
-																	 
-																	        <p:commandButton id="toggler" type="button" value="Columns" style="float:right" icon="ui-icon-calculator" />
-																	        <p:columnToggler datasource="tabla" trigger="toggler" />
+																	        Lista de Educadores
 																	</f:facet> 
 													                
 													                
-													            <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
         
-																<p:column headerText="cedula" >
+																<h:column headerText="cedula" >
 																 <h:outputText value="#{ter.cedula}" />
-																</p:column>
+																</h:column>
 															
-																<p:column headerText="NOMBRES">
+																<h:column headerText="NOMBRES">
 																<h:outputText value="#{ter.nombre}" />
-																</p:column>
+																</h:column>
 																
 																
-																<p:column headerText="APELLIDO">
+																<h:column headerText="APELLIDO">
 																
 																<h:outputText value="#{ter.apellido}" />
 																
-																</p:column>
+																</h:column>
+																<h:column headerText="APELLIDO">
+																
+																<h:commandButton value="agregar" action="#{niñoCotroller.addTerapista(ter)}">
+																<f:ajax execute="@this" render=":formcat"/>
+																</h:commandButton> 
+																
+																</h:column>
 																 
-																
-																
 																<f:facet name="footer">
-																<p:commandButton action="#{niñoCotroller.MostrarTerapistasSeleccionadas()}"  value="DONE"
+																<h:commandButton action="#{niñoCotroller.MostrarTerapistasSeleccionadas()}"  value="DONE"
 														            onclick="javascript:quitarDivcategorias()">
-														            <p:ajax process="@this" update="@none"/>
-														            </p:commandButton>
+														            <f:ajax execute="@this" render=":formNiño"/>
+														            </h:commandButton>
 															    </f:facet>
 																
 																
-															</p:dataTable>
+															</h:dataTable>
 															
+											<div class="control-group">
+												<h:outputLabel class="control-label"  value="#{niñoCotroller.msgAgregar}"/>															
+                    						</div>		
 						          </h:form>	
 						<h1 align="center"><a onclick="javascript:quitarTerapistas()">Cancel</a></h1>
 					</div>

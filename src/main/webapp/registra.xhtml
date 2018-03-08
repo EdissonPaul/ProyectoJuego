@@ -118,6 +118,10 @@
 				<label>Ingrese de nuevo su contraseña</label>
 				<h:inputSecret class="input1" type="password" name="confirm pasdsword" a:placeholder="**********" a:required="" value="#{terapistaCotroller.claveInsertada}"/>
 			</div>
+			<div >
+				<h:outputLabel  name="mesg" value="#{terapistaCotroller.errorMsg}"/>
+				
+			</div>
 			<div class="signup">
 				<h:commandButton type="submit" value="Registrar" action="#{terapistaCotroller.validarDatosRegistro()}"/>
 			</div>

@@ -61,9 +61,13 @@ public class NiñoCotroller {
 	        new SelectItem("12", "Diciembre")};
 	 
     private String opcionActual;
+    
+    private String msgAgregar;
 	
 	private List<Terapista> listaTerapistas;
 	private List<Terapista> selectedTerapistas;
+	
+	private Terapista terapistaSeleccionado;
 	
 	private List<SesionJuego> sesionesNino;
 	
@@ -157,6 +161,29 @@ public class NiñoCotroller {
 		System.out.println("Niño obtenido detalle " +nino);
 		loadSesiones(id);
 	}
+	
+	public void deleteTer(Terapista ter) {
+		if(selectedTerapistas.contains(ter) && ter!=ses.getUser()) {
+			selectedTerapistas.remove(ter);
+			System.out.println("delete "+selectedTerapistas.size());
+		}
+			
+	}
+	
+	public void addTerapista(Terapista ter) {
+		System.out.println("add entro ");
+		if(!selectedTerapistas.contains(ter)) {
+			selectedTerapistas.add(ter);
+			msgAgregar="El educador ha sido Agregado";
+			System.out.println("add "+selectedTerapistas.size());
+		}else {
+			msgAgregar="El educador ya ha sido Agregado anteriormente";
+		}
+		this.campoCedula="";
+		loadTerapistas();
+		System.out.println("tam "+selectedTerapistas.size());
+	}
+	
 	public void loadSesiones(int id) {
 		
 		String f="";
@@ -299,6 +326,13 @@ public class NiñoCotroller {
 		
 	}
 	
+	
+	
+	
+	
+	
+	
+	
 	public String getErrUsuario() {
 		return errUsuario;
 	}
@@ -436,13 +470,29 @@ public class NiñoCotroller {
 		this.filtersSesions = filtersSesions;
 	}
 
-	
-	
-	
 
-	
-	
-	
+
+	public Terapista getTerapistaSeleccionado() {
+		return terapistaSeleccionado;
+	}
+
+
+
+	public void setTerapistaSeleccionado(Terapista terapistaSeleccionado) {
+		this.terapistaSeleccionado = terapistaSeleccionado;
+	}
+
+
+
+	public String getMsgAgregar() {
+		return msgAgregar;
+	}
+
+
+
+	public void setMsgAgregar(String msgAgregar) {
+		this.msgAgregar = msgAgregar;
+	}
 	
 
 }

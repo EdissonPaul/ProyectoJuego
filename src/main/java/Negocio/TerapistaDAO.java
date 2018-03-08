@@ -73,13 +73,9 @@ public class TerapistaDAO {
 	
 	public List<Terapista> getTerapistas( String nom,String ape,String ced){
 		
-		String jpql = "Select p From Terapista p where cedula like :ced " + 
-				" and nombre like :nom " + 
-				" and apellido like :ap ";
+		String jpql = "Select p From Terapista p where cedula = :ced ";
 				Query q = em.createQuery(jpql,Terapista.class);
-				q.setParameter("ced", ced+"%");
-				q.setParameter("nom", "%"+nom+"%");
-				q.setParameter("ap", "%"+ape+"%");
+				q.setParameter("ced", ced);
 				List<Terapista> listado = q.getResultList();
 				System.out.println(listado.size());
 				return listado;

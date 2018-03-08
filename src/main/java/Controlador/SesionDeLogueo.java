@@ -22,6 +22,7 @@ public class SesionDeLogueo implements Serializable{
 	
 	//Para el TerapistaNiño 
 	private Terapista user;
+	private List<Terapista> selectedTerapistas;
 
 	public Terapista getUser() {
 		return user;
@@ -29,6 +30,14 @@ public class SesionDeLogueo implements Serializable{
 
 	public void setUser(Terapista user) {
 		this.user = user;
+	}
+
+	public List<Terapista> getSelectedTerapistas() {
+		return selectedTerapistas;
+	}
+
+	public void setSelectedTerapistas(List<Terapista> selectedTerapistas) {
+		this.selectedTerapistas = selectedTerapistas;
 	}
 	
 
