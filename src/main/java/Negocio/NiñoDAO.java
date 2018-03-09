@@ -147,5 +147,17 @@ public class NiñoDAO {
 		
 	}
 	
+	public List<TerapistaNiño> getTerapistaNinos(int id){
+		
+		String jpql = "SELECT n FROM TerapistaNiño n "
+				+ "WHERE n.niño.id = :id";
+				Query q = em.createQuery(jpql,TerapistaNiño.class);
+				q.setParameter("id", id);
+				List<TerapistaNiño> listado = q.getResultList();
+				System.out.println(listado.size());
+				return listado;
+		
+	}
+	
 	
 }

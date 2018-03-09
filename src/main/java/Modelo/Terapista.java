@@ -47,7 +47,7 @@ public class Terapista implements Serializable{
 	@NotNull
 	private String username;
 	
-	@Size(min=4, max=128)
+	@Size(min=4, max=128,message="Se requiere mas de 4 caracteres.")
 	@Column(name="log_password")
 	@NotNull
 	private String password;

@@ -25,20 +25,21 @@ public class Sesion implements Serializable{
 	private String user;
 	private String password;
 	
+	
 	private Terapista t;
 
+	private String tipo;
 	@Inject
 	private SesionDeLogueo ses;
 	
-	@Inject
-	private AdministradorDAO adminDao;
+	
 	
 	@Inject
 	private TerapistaDAO terDao;
 	
-	//Lista de usuarios administradores
-	private List<Administrador> listAdmin;
 	
+	@Inject
+	private AdministradorDAO adminDao;
 
 	
 	public String getUser() {
@@ -73,7 +74,7 @@ public class Sesion implements Serializable{
 	 * Metodo de logeo del usuario administrador
 	 * @return si se cumple la condicion returna pagina del administrados caso contrario retorna usuario o contraseña incorrecto
 	 */
-	public String loginTerapista(){
+	/*public String loginTerapista(){
 		System.out.println("login....... Terapista");
 		
 		 t= terDao.buscarTerapista(user, password);
@@ -87,22 +88,56 @@ public class Sesion implements Serializable{
 		}else{
 			return null;
 		}
-	}
-	
-	/**
-	 * Metodo de logeo del usuario administrador
-	 * @return si se cumple la condicion returna pagina del administrados caso contrario retorna usuario o contraseña incorrecto
-	 */
-	public String loginAdmin(){
-		System.out.println("login......................");
+	}*/
+	public String loginTerapista(){
+		System.out.println("login....... Terapista");
 		
-		listAdmin = adminDao.loginAdmin(user, password);
-		if(!listAdmin.isEmpty()){	
-			return "administrador";
-		}else{
+		 t= terDao.buscarTerapista(user, password);
+		 Administrador adm  =  adminDao.loginAdmin(user, password);
+		 String usuObtenido = "";
+		 String passObtenido = "";
+		 System.out.println(t);
+		 if(adm!=null){
+			 usuObtenido = adm.getUsuario();
+			 passObtenido = adm.getContraseña();
+			 tipo ="administrador";
+		 }
+		 if(t!=null){
+			usuObtenido = t.getUsername();
+			passObtenido = t.getPassword(); 
+			tipo ="terapista"; 
+		 }
+		 
+		 if(user.equals(usuObtenido)&&password.equals(passObtenido)){
+			 if(tipo.equals("administrador")){
+				 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", adm);
+				return "listarTerapistas.jsf?faces-redirect=true"; 
+			 }else {
+				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", t);
+				ses.setUser(t);
+				return "admin.jsf?faces-redirect=true";
+			}
+		 }else {
 			return null;
 		}
+		
+		 
+		/* 
+		 if(t!=null){	
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", t);
+			//HttpSession session =Util.getSession();
+	        //session.setAttribute("username",user);
+			ses.setUser(t);
+			return "admin.jsf?faces-redirect=true";
+		}else{
+			return null;
+		}*/
+		
+		
 	}
+
+	
+	
 	
 	/**
 	 * Metodo para cerrar secion

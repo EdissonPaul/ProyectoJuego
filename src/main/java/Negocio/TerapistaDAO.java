@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import Modelo.Administrador;
 import Modelo.Terapista;
 
 
@@ -105,6 +104,23 @@ public class TerapistaDAO {
 		Terapista t=new Terapista();
 		t = em.find(Terapista.class, id);
 		return t;
+	}
+	public List<Terapista> getTerapistas(){
+		/*String jpql = "SELECT tn FROM TerapistaNiño tn left join fetch tn.terapistaNiño n "
+				+ "WHERE tn.terapista.id = :id"
+				+" and n.nombre like :nom "  
+				+" and n.apellido like :ap ";*/
+		String jpql = "SELECT tn FROM Terapista tn";
+				Query q = em.createQuery(jpql,Terapista.class);
+				
+				List<Terapista> listado = q.getResultList();
+				System.out.println(listado.size());
+				return listado;
+	}
+	
+	public void borrar(int id){
+		Terapista nin = em.find(Terapista.class, id);
+		em.remove(nin);
 	}
 	
 }

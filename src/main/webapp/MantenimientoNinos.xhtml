@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+      <ui:composition template="/WEB-INF/plantillat2.xhtml">
+
+<h:head></h:head> 
+<ui:define name="contenido">
+<body> 
+<h:form>
+<br /><br /><br /><br />
+<h2>Campos de Busqueda</h2>
+
+<div class="row uniform">
+		<div class="6u 12u$(xsmall)">
+			<label>Nombres</label>
+			<h:inputText class="span11" value="#{niñoCotroller.nombreNino}" id="nom"></h:inputText>
+        </div>
+		<div class="6u 12u$(xsmall)">
+			<label>Apellidos</label>
+			<h:inputText class="span11" value="#{niñoCotroller.apeNino}" id="ape" >
+															</h:inputText>
+		</div>
+		
+	</div>
+	<h:commandButton action="#{niñoCotroller.loadNinños()}"  value="search">
+			<f:ajax  render="tablaN" execute="ape nom"></f:ajax>
+						        						
+	</h:commandButton>
+
+	<h:dataTable id="tablaN" var="tn" value="#{niñoCotroller.listNino}" styleClass="employeeTable"
+         headerClass="employeeTableHeader"
+         rowClasses="employeeTableOddRow,employeeTableEvenRow">
+	<h:column>
+	<f:facet name="header">id</f:facet>
+	#{tn.niño.id}
+	</h:column>
+	<h:column>
+	<f:facet name="header">Nombre</f:facet>
+	#{tn.niño.nombre}
+	</h:column>
+	<h:column>
+	<f:facet name="header">Apellido</f:facet>
+	#{tn.niño.apellido}
+	</h:column>
+	<h:column>
+	<f:facet name="header">Sexo</f:facet>
+	#{tn.niño.sexo}
+	</h:column>
+	<h:column>
+	<f:facet name="header">Institucion</f:facet>
+	#{tn.niño.institucion}
+	</h:column>
+	<h:column>
+	<f:facet name="header">Usuario</f:facet>
+	#{tn.niño.usuario}
+	</h:column>
+	
+	 <h:column>
+	<h:commandButton value="Delete" action="#{niñoCotroller.deleteNino(tn.niño)}">
+	<f:ajax execute="@this" render="@all"></f:ajax>
+	</h:commandButton>
+	</h:column>
+	
+	<h:column>
+	<a href="Sesiones.xhtml?id=#{tn.niño.id}">More Details</a>
+	</h:column>
+	</h:dataTable>
+
+<br /><br />	
+</h:form>
+</body>
+</ui:define> 
+</ui:composition>
+</html>

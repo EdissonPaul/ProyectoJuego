@@ -12,7 +12,7 @@
 	    <meta name="description" content="" />
 	    <meta name="author" content="" />
 	<link rel="icon" type="image/png" href="resources/images/PIKE.png"/>
-    <title>Sula. Registro de nuevo Usuario</title>
+    <title>PIKE APRENDE. Registro de nuevo Usuario</title>
 
     <!-- Bootstrap core CSS -->
     <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
@@ -111,8 +111,9 @@
 				<h:inputText  class="input1" type="email" name="email" a:placeholder="Usuario" a:required="" value="#{terapistaCotroller.ter.username}"/>
 			</div>
 			<div class="pass1">
-				<label>Contraseña</label>
-				<h:inputSecret class="input1" type="password" name="password" a:placeholder="**********" a:required="" value="#{terapistaCotroller.ter.password}"/>
+				<label for="pas">Contraseña</label>
+				<h:inputSecret id="pas" class="input1" type="password" name="password" a:placeholder="**********" a:required="" value="#{terapistaCotroller.ter.password}"/>
+				<h:message for="pas"/>
 			</div>
 			<div class="pass2">
 				<label>Ingrese de nuevo su contraseña</label>
@@ -124,6 +125,7 @@
 			</div>
 			<div class="signup">
 				<h:commandButton type="submit" value="Registrar" action="#{terapistaCotroller.validarDatosRegistro()}"/>
+				
 			</div>
 		</h:form>
 	</div>

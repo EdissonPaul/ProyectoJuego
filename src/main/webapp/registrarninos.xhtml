@@ -51,9 +51,11 @@
   </div>
   
   <p></p>
-	<h:outputText value="#{niñoCotroller.errUsuario}" />
+	<h:outputText id="error" value="#{niñoCotroller.errUsuario}" />
 	<p></p>
-  <h:commandButton  class="btn btn-primary" value="Registrar" action="#{niñoCotroller.validarDatosRegistro()}"/>
+  <h:commandButton  class="btn btn-primary" value="Registrar" action="#{niñoCotroller.validarDatosRegistro()}">
+  	<f:ajax execute="@all" render="nom ape sexo usuario ins eror ff"></f:ajax>
+  </h:commandButton>
   <br />
   <h3> Educadores Seleccionados</h3>
 <h:dataTable  id="tablaTerSel" var="ter" value="#{niñoCotroller.selectedTerapistas}" paginator="true" rows="10" 

@@ -8,8 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import Modelo.Actividad;
-import Modelo.Administrador;
-
 
 @Stateless
 public class ActividadDAO {

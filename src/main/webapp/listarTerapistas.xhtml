@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+      <ui:composition template="/WEB-INF/plantillat2.xhtml">
+
+<h:head></h:head> 
+<ui:define name="contenido">
+<body> 
+<h:form>
+<br /><br /><br /><br />
+<h2>Campos de Busqueda</h2>
+
+
+	<h:dataTable id="tablaN" var="tn" value="#{adminController.listaTerapista}" styleClass="employeeTable"
+         headerClass="employeeTableHeader"
+         rowClasses="employeeTableOddRow,employeeTableEvenRow">
+	<h:column>
+	<f:facet name="header">id</f:facet>
+	#{tn.id}
+	</h:column>
+	<h:column>
+	<f:facet name="header">Nombre</f:facet>
+	#{tn.nombre}
+	</h:column>
+	<h:column>
+	<f:facet name="header">Apellido</f:facet>
+	#{tn.apellido}
+	</h:column>
+	<h:column>
+	<f:facet name="header">cedula</f:facet>
+	#{tn.cedula}
+	</h:column>
+	
+	<h:column>
+	<h:commandButton value="Eliminar" action="#{adminController.deleteTerapistas(tn)}">
+	<f:ajax execute="@this" render="@all"></f:ajax>
+	</h:commandButton>
+	<h:commandButton value="Ver niños" action="#{adminController.ViewNiños(tn)}"></h:commandButton>
+	</h:column>
+	<h:column>
+	
+	</h:column>
+	</h:dataTable>
+
+<br /><br />	
+</h:form>
+</body>
+</ui:define> 
+</ui:composition>
+</html>

@@ -10,9 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.facelets.FaceletContext;
 import javax.inject.Inject;
 
-import Modelo.Administrador;
 import Modelo.Terapista;
-import Negocio.AdministradorDAO;
 
 
 

@@ -14,13 +14,12 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
-import Modelo.Administrador;
 import Modelo.Niño;
 import Modelo.SesionJuego;
 import Modelo.Terapista;
 import Modelo.TerapistaNiño;
-import Negocio.AdministradorDAO;
 import Negocio.NiñoDAO;
+import Negocio.SesionJuegoDao;
 import Negocio.TerapistaDAO;
 import Negocio.TerapistaNiñoDao;
 
@@ -96,6 +95,8 @@ public class NiñoCotroller {
 	@Inject
 	private SesionDeLogueo ses;
 	
+	@Inject
+	private SesionJuegoDao sesDao;
 	
 	
 	@PostConstruct
@@ -193,6 +194,36 @@ public class NiñoCotroller {
 		sesionesNino=ninoDao.obtenerSesiones(id, f, ff);
 	
 	}
+	
+	public void deleteNino(Niño n) {
+		
+		List<TerapistaNiño> listTN=new ArrayList<TerapistaNiño>();
+		String f="";
+		String ff=formateador.format(campof_fin);
+		if(campof_in!=null)
+			f=""+formateador.format(campof_in);
+		List<SesionJuego> sesList=new ArrayList<SesionJuego>();
+				sesList=ninoDao.obtenerSesiones(id, f, ff);
+		listTN=ninoDao.getTerapistaNinos(n.getId());
+		
+		for (int i = 0; i < listTN.size(); i++) {
+			tnDao.borrar(listTN.get(i).getId());
+		}
+		for (int i = 0; i < sesList.size(); i++) {
+			sesDao.borrar(sesList.get(i).getId());
+		}
+		
+		ninoDao.borrar(n.getId());;
+		init();
+	}
+	
+	public void deleteSesion(SesionJuego s) {
+		
+		
+			sesDao.borrar(s.getId());
+			
+			init();
+	}
 
 	public Niño getNino() {
 		return nino;
@@ -274,7 +305,7 @@ public class NiñoCotroller {
 		
 		
 		errUsuario = "";
-		
+		System.out.println("nino "+nino);
 		if(nino.getNombre().equals("") || nino.getApellido().equals("") || nino.getUsuario().equals("") || nino.getInstitucion().equals("") || nino.getSexo().equals("") || nino.getEdad() ==null){
 			errUsuario = "Campos Vacios";
 		}

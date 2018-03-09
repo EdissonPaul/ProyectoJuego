@@ -3,45 +3,68 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"> 
 
 <h:head>
-
+	<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" />
+	<h:outputScript library="primefaces" name="jquery/jquery-plugins.js" target="head" />
+		  
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	    <meta name="description" content="" />
 	    <meta name="author" content="" />
 	<link rel="icon" type="image/png" href="resources/images/PIKE.png"/>
-    <title>PIKE APRENDE. Inicio de Sesion</title>
+    <title>PIKE APRENDE. Administrador</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    
+    <link rel="stylesheet" href="resources/css/main.css" />
+    
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+ 
+<link href="resources/css/StyleSheet.css" rel="stylesheet" />		
 
-    <!-- Custom styles for this template -->
-    <link href="resources/css/modern-business.css" rel="stylesheet"/>
-	<link href="resources/registrar/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+
+<title>CSS3 Contact Form</title>
+  
+<link href="resources/css/style.css" rel="stylesheet" type="text/css" media="screen" />
+	
+   
+
+   <f:event listener="#{plantillaController.verificarUsuario()}" type="preRenderView"></f:event>
 
 </h:head> 
 <body> 
  <!-- Navigation -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#{appController.path}/inicio.jsf">Pike Aprende</a>
+        <a class="navbar-brand" href="#{appController.path}/admin.jsf">Pike Aprende</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-          	<li class="nav-item">
-              <a class="nav-link" href="#{appController.path}/inicio.jsf">Inicio</a>
-            </li>
+           
             <li class="nav-item">
-              <a class="nav-link" href="#{appController.path}/registra.jsf">Registrarse</a>
+              <a class="nav-link" href="#{appController.path}/listarTerapistas.jsf">Listar Terapistas</a>
             </li>
+            
+            <h:form>
+            <h:commandButton action="#{sesion.cerrarSecion()}" value="Log Out" />
+            </h:form>
+            <!--  
             <li class="nav-item">
               <a class="nav-link" href="#{appController.path}/login.jsf">Iniciar Sesion</a>
             </li>
-            
+            -->
+            <!--  
+            <li class="nav-item">
+              <a class="nav-link" href="">Contact</a>
+            </li>
+            -->
             <!--  
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -87,37 +110,35 @@
       </div>
     </nav>
 
-<div class="form">
-<h1>PIKE APRENDE</h1>
-	<div class="form-content">
-		<h:form action="#" method="post">
-			<div class="form-info">
-				<h2>Logeo Terapista</h2>
-			</div>
-			<div class="email">
-				<label>Usuario</label>
-				<h:inputText  class="input1" type="email" name="email" a:placeholder="Usuario" a:required="" value="#{sesion.user}"/>
-			</div>
-			<div class="pass1">
-				<label>Contraseña</label>
-				<h:inputSecret class="input1" type="password" name="password" a:placeholder="**********" a:required="" value="#{sesion.password}"/>
-			</div>
-			<div class="signup">
-				<h:commandButton type="submit" value="INICIAR SESIÓN" action="#{sesion.loginTerapista()}"/>
-			</div>
-		</h:form>
-	</div>
-</div>
+
     
 
 
+    <!-- Page Content -->
+    <div class="container">
+		<ui:insert name="contenido">
+            <span>Página en construcción</span>
+        </ui:insert>
+      
+    </div>
+    <!-- /.container -->
 
 
 
+
+
+
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white"></p>
+      </div>
+      <!-- /.container -->
+    </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="resources/js/jquery.min.js"></script>
-    <script src="resources/js/bootstrap.bundle.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </body> 
 </html>

@@ -1,5 +1,6 @@
 package Controlador;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -7,12 +8,15 @@ import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 
 import Modelo.TerapistaNiño;
+import Modelo.Niño;
 import Modelo.Terapista;
 import Negocio.LoginDAO;
+import Negocio.NiñoDAO;
 import Negocio.TerapistaDAO;
+import Negocio.TerapistaNiñoDao;
 
 @ManagedBean
-public class TerapistaCotroller {
+public class AdminController {
 	
 	@Inject
 	private TerapistaDAO terapistaDao;
@@ -21,6 +25,14 @@ public class TerapistaCotroller {
 	private LoginDAO loginDao;
 	
 	@Inject
+	private NiñoDAO ninoDao;
+	
+	@Inject
+	private TerapistaNiñoDao tnDao;
+	
+	@Inject
+	private SesionDeLogueo ses;
+	
 	private Terapista ter;
 	
 	private String errUsuario;
@@ -30,9 +42,14 @@ public class TerapistaCotroller {
 	private String errorMsg;
 	
 	private List<Terapista> listaTerapista;
+	private List<Niño> listaniños;
+	
+	
 	@PostConstruct
 	public void init(){
+		ter=new Terapista();
 		ter = new Terapista();
+		loadTerapistas();
 	}
 	
 
@@ -67,9 +84,7 @@ public class TerapistaCotroller {
 				errorMsg="Error, cedula ya registrada.";
 				System.out.println(errCedula);
 			}
-			if(!validarCedula(idCedula)) {
-				errorMsg="Error, incorrecta.";
-			}
+			
 		}
 		
 		//Validamos que coincidan Contraseñas insertadas
@@ -109,51 +124,33 @@ public class TerapistaCotroller {
 			return null;
 		}
 	}
-	
-	public boolean validarCedula(String cedula) {
-		    int suma=0;
-		    if(cedula.length()==9){
-		      System.out.println("Ingrese su cedula de 10 digitos");
-		      return false;
-		    }else{
-		      int a[]=new int [cedula.length()/2];
-		      int b[]=new int [(cedula.length()/2)];
-		      int c=0;
-		      int d=1;
-		      for (int i = 0; i < cedula.length()/2; i++) {
-		        a[i]=Integer.parseInt(String.valueOf(cedula.charAt(c)));
-		        c=c+2;
-		        if (i < (cedula.length()/2)-1) {
-		          b[i]=Integer.parseInt(String.valueOf(cedula.charAt(d)));
-		          d=d+2;
-		        }
-		      }
-		    
-		      for (int i = 0; i < a.length; i++) {
-		        a[i]=a[i]*2;
-		        if (a[i] >9){
-		          a[i]=a[i]-9;
-		        }
-		        suma=suma+a[i]+b[i];
-		      } 
-		      int aux=suma/10;
-		      int dec=(aux+1)*10;
-		      if ((dec - suma) == Integer.parseInt(String.valueOf(cedula.charAt(cedula.length()-1))))
-		        return true;
-		      else
-		        if(suma%10==0 && cedula.charAt(cedula.length()-1)=='0'){
-		          return true;
-		        }else{
-		          return false;
-		        }
-		     
-		  
-	}
-		    
 
-}
 	
+	public void loadTerapistas() {
+		
+		listaTerapista=terapistaDao.getTerapistas();
+		System.out.println("tamaño de lista niños" +listaTerapista.size());
 	
+	}
+	
+	public void deleteTerapistas(Terapista t) {
+		
+		List<TerapistaNiño> listTN=new ArrayList<TerapistaNiño>();
+		listTN=ninoDao.getniñoss(t.getId(),"","");
+		
+		for (int i = 0; i < listTN.size(); i++) {
+			tnDao.borrar(listTN.get(i).getId());
+		}	
+		
+		terapistaDao.borrar(t.getId());
+		init();
+	}
+	
+	public String ViewNiños(Terapista t) {
+		
+		ses.setUser(t);
+		return "MantenimientoNinos.jsf?faces-redirect=true";
+	}
 
 	public String getErrorMsg() {
 		return errorMsg;
@@ -232,5 +229,29 @@ public class TerapistaCotroller {
 
 	public void setListaTerapista(List<Terapista> lisaTerapista) {
 		this.listaTerapista = lisaTerapista;
+	}
+
+
+
+	public List<Niño> getListaniños() {
+		return listaniños;
+	}
+
+
+
+	public void setListaniños(List<Niño> listaniños) {
+		this.listaniños = listaniños;
+	}
+
+
+
+	public SesionDeLogueo getSes() {
+		return ses;
+	}
+
+
+
+	public void setSes(SesionDeLogueo ses) {
+		this.ses = ses;
 	}
 }

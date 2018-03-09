@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import Modelo.Actividad;
-import Modelo.Administrador;
+import Modelo.Niño;
 import Modelo.SesionJuego;
 
 
@@ -26,6 +26,10 @@ public class SesionJuegoDao {
 		}
 		
 		
+	}
+	public void borrar(int id){
+		SesionJuego nin = em.find(SesionJuego.class, id);
+		em.remove(nin);
 	}
 
 }
